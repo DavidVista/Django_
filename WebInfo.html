@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> ReMind! </title>
+		<meta charset="UTF-8"/>
+		<script src="Re.js"></script>
+		<link href="Re.css" rel="stylesheet" type="text/css"/>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	</head>
+	<body>
+	<div class="container-xxl">
+		<header>
+			<nav class="navbar navbar-light bg">
+				<div class="container-fluid">
+				<a class="navbar-brand" href="Index.html">
+				<h1 class="label"> <span class="sb">ReMind</span> <span class="sb" style="animation-delay: 0.25s">— do</span> <span class="sb" style="animation-delay: 0.35s">more and</span> <span class="sb" style="animation-delay: 0.45s">save more</span> <span class="sb" style="animation-delay: 0.65s">with us!</span> </h1>
+				</a>
+				</div>
+			</nav>
+		</header>
+		<div class="wrapper end">
+			<div style="animation:move; animation-duration: 2s;">
+				<h2 class="sb label"> О сайте </h2>
+				<ul>
+				<li class="addit"><a href="WebInfo.html">Соглашения</a></li>
+				<li class="addit"><a class="addit" href="WebInfo.html">Задачи</a></li>
+				<li class="addit"><a class="addit" href="WebInfo.html">Отзывы</a></li>
+				</ul>
+			</div>
+			<div>
+			<h2 class="sb label">FAQ — Frequently Asked Questions</h2>
+			<ol>
+					<li class="addit"> <a href="FAQ.html"> Требуется ли какая-нибудь плата? </a> </li>
+					<li class="addit"> <a href="FAQ.html"> Зачем нужен ReMind? </a> </li>
+					<li class="addit"> <a href="FAQ.html"> О чём можно писать </a> </li>
+					<li class="addit"> <a href="FAQ.html"> Видят ли мои записи другие пользователи?</a> </li>
+					<li class="addit"> <a href="FAQ.html"> С чего начать? </a></li>
+			</ol>
+			</div>
+			<div>
+				<h2 class="sb label" align="right" style="margin-right:30px;"> Вход и регистрация </h2>
+					<div class="wrapper-c" align="left" title="Пожалуйста, введите логин и пароль">
+					<div class="input-group input-group input-group-sm mb-3"><span id="a1" class="login input-group-text"> Логин: </span> <input class="form-control" id="a" maxlength="20" size="18" align="right"/> </div>
+					<div class="input-group input-group-sm mb-3"><span id="b1" class="login input-group-text"> Пароль: </span> <input class="form-control" id="b" type="password" maxlength="20" size="18" align="right"/> </div>
+					</div>
+					<button class="btn btn-outline-primary" onclick="get()" class="bl" title="Отправить!"> Войти </button> <br>
+					<div class="wrapper">
+						<span title="Если вы забыли пароль"> <a href="#"> Не помню пароль </a> </span>
+						<span title="Если вы в первый раз"> <a href="#"> Регистрация </a> </span>
+					</div>
+			</div>
+		</div>
+		<div class = "end">
+		<h1>О сайте</h1>
+		<div class="wrapper-c">
+		
+		<div>
+		<h3 class="btn btn-light" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Соглашения</h3>
+		<div class="collapse" id="collapse1">
+			<div class="card card-body">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet vestibulum est condimentum id. Integer tempus nec diam in faucibus. Integer tellus quam, sollicitudin eu nulla a, eleifend finibus augue. Etiam sit amet lectus imperdiet, tincidunt sapien eget, rutrum quam. Nulla varius est dui, at maximus augue laoreet aliquam. Quisque pharetra ante justo, sed venenatis ipsum placerat semper. Sed et eleifend odio.
+			</div>
+		</div>
+		</div>
+		
+		<div>
+		<h3 class="btn btn-light" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">Задачи ReMind</h3>
+		<div class="collapse" id="collapse2">
+			<div class="card card-body">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet vestibulum est condimentum id. Integer tempus nec diam in faucibus. Integer tellus quam, sollicitudin eu nulla a, eleifend finibus augue. Etiam sit amet lectus imperdiet, tincidunt sapien eget, rutrum quam. Nulla varius est dui, at maximus augue laoreet aliquam. Quisque pharetra ante justo, sed venenatis ipsum placerat semper. Sed et eleifend odio.
+			</div>
+		</div>
+		</div>
+		
+		<div>
+		<h3 class="btn btn-light" data-bs-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapse3">Отзывы</h3>
+		<div class="collapse" id="collapse3">
+			<div class="card card-body">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet vestibulum est condimentum id. Integer tempus nec diam in faucibus. Integer tellus quam, sollicitudin eu nulla a, eleifend finibus augue. Etiam sit amet lectus imperdiet, tincidunt sapien eget, rutrum quam. Nulla varius est dui, at maximus augue laoreet aliquam. Quisque pharetra ante justo, sed venenatis ipsum placerat semper. Sed et eleifend odio.
+			</div>
+		</div>
+		</div>
+		<hr>
+		<div class="end" align="center"> 
+		<p> ReMind </p>
+		<p> Приятного пользования </p>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</body>
+</html>
