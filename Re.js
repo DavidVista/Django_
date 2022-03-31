@@ -3,6 +3,31 @@ var user = [];
 var names = [];
 var n = 0;
 
+function load(x){
+	document.getElementById("a1").innerText = "Логин " + x;
+		
+	document.getElementById("a").remove();
+	document.getElementById("b").remove();
+	document.getElementById("b1").remove();
+	document.getElementById("lg-btn").remove();
+	document.getElementById("rg").remove();
+		
+	document.getElementById("log-bl").align = "center";
+	var b = document.createElement("button");
+	b.className = "btn btn-light";
+	b.innerText = "Аккаунт";
+	document.getElementById("log-bl").appendChild(b);
+		
+	if (document.location.href === "file:///C:/Python%2038/PyProjects/Django_/Index.html") {
+		document.getElementById("frm").title= "Приятного пользования!";
+		
+		var lst = document.getElementsByClassName("f");
+		for (var i = 0; i < 8; i++) {
+				lst[i].disabled = false;
+			}
+	}
+}
+
 function login() {
 	log = document.getElementById("a").value;
 	pass = document.getElementById("b").value;
@@ -12,28 +37,7 @@ function login() {
 		if (user[1] != "") {
 			alert(`Добро пожаловать, ${log}!`);
 			document.getElementById("b1").style.backgroundColor = "#ebfaca";
-			document.getElementById("a1").innerText = "Логин " + log;
-		
-			document.getElementById("a").remove();
-			document.getElementById("b").remove();
-			document.getElementById("b1").remove();
-			document.getElementById("lg-btn").remove();
-			document.getElementById("rg").remove();
-		
-			document.getElementById("log-bl").align = "center";
-			var b = document.createElement("button");
-			b.className = "btn btn-light";
-			b.innerText = "Аккаунт";
-			document.getElementById("log-bl").appendChild(b);
-		
-			if (document.location.href === "file:///C:/Python%2038/PyProjects/Django_/Index.html") {
-				document.getElementById("frm").title= "Приятного пользования!";
-		
-				var lst = document.getElementsByClassName("f");
-				for (var i = 0; i < 8; i++) {
-					lst[i].disabled = false;
-				}
-				}
+			load(log);
 		}
 		
 		else {
@@ -114,6 +118,7 @@ function reg() {
 					pass.value = null;
 					pass1.value = null;
 					document.location.href = "Index.html";
+					load(log.value);
 				}
 				else {
 					alert("Пароль не совпадает!")
