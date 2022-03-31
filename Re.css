@@ -27,15 +27,16 @@ span.input-group-text {
 
 .sb {
 	animation: appear;
-	animation-duration: 1.5s;
+	animation-duration: 0.5s;
+	animation-delay: 0.25s;
 	animation-timing-function: ease-out;
 	animation-fill-mode: both;
 	animation-play-state: running;
 }
 a {
 	animation: appear;
-	animation-duration: 3.5s;
-	animation-delay: 0.55s;
+	animation-duration: 1s;
+	animation-delay: 0.75s;
 	animation-timing-function: ease-out;
 	animation-fill-mode: both;
 	animation-play-state: running;
@@ -69,7 +70,7 @@ a {
 	border: groove 2px;
 	padding: 10px;
 	font-size: 16px;
-	transition: 0.5s;
+	transition: 1s;
 }
 
 .block:hover{
@@ -77,7 +78,7 @@ a {
 }
 
 .label {
-	transition: 0.5s;
+	transition: 1s;
 }
 
 .label:hover{
@@ -86,19 +87,22 @@ a {
 }
 
 .addit {
-	transition: 0.5s;
+	transition: 0.25s;
 }
 
 .addit:hover{
 	transform: translate(10px, 0);
 }
 
-textarea {
-	resize: auto;
+.clr {
+	color: #a8c763;
 }
 
-.news {
-	margin: 5px;
+.label-l {
+	margin-bottom: 16px;
+	margin-left: 8px;
+	text-shadow: 2px 2px 6px black;
+	color: #ebfaca;
 }
 
 .cent {

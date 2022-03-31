@@ -1,19 +1,40 @@
-var login, pass;
+var log, pass, email, pass1;
 var user = [];
 var names = [];
 var n = 0;
 
-function get(){
-	login = document.getElementById("a").value;
+function login() {
+	log = document.getElementById("a").value;
 	pass = document.getElementById("b").value;
-	user = [login, pass];
+	user = [log, pass];
 	if (user[0] != "") {
 		document.getElementById("a1").style.backgroundColor = "#ebfaca";
 		if (user[1] != "") {
-		alert(`Добро пожаловать, ${login}!`);
+		alert(`Добро пожаловать, ${log}!`);
 		document.getElementById("b1").style.backgroundColor = "#ebfaca";
-		document.getElementById("a").value = null;
-		document.getElementById("b").value = null; }
+		document.getElementById("a1").innerText = "Логин " + log;
+		
+		document.getElementById("a").remove();
+		document.getElementById("b").remove();
+		document.getElementById("b1").remove();
+		document.getElementById("lg-btn").remove();
+		document.getElementById("rg").remove();
+		
+		document.getElementById("log-bl").align = "center";
+		var b = document.createElement("button");
+		b.className = "btn btn-light";
+		b.innerText = "Аккаунт";
+		document.getElementById("log-bl").appendChild(b);
+		
+		if (document.location.href === "file:///C:/Python%2038/PyProjects/Django_/Index.html") {
+		document.getElementById("frm").title= "Приятного пользования!";
+		document.getElementById("NoteHead").disabled = false;
+		document.getElementById("f-btn-1").disabled = false;
+		document.getElementById("f-btn-2").disabled = false;
+		document.getElementById("NoteText").disabled = false;
+		}
+		
+		}
 		else {
 			alert("Введите пароль!");
 			document.getElementById("b1").style.backgroundColor = "red";
@@ -65,8 +86,53 @@ function note() {
 		n++;
 	}
 	else {
-		alert("Введите название!");
+		alert("Введите корректное название!");
 		document.getElementById("NoteHead").style.color = "red";
+	}
+}
+
+function reg() {
+	email = document.getElementById("e");
+	log = document.getElementById("a");
+	pass = document.getElementById("b");
+	pass1 = document.getElementById("bb");
+	
+	user = [email.value, log.value, pass.value, pass1.value];
+	
+	if (user[0] != "") {
+		document.getElementById("e1").style.backgroundColor = "#ebfaca";
+		if (user[1] != "") {
+			document.getElementById("a1").style.backgroundColor = "#ebfaca";
+			if (user[2] != "") {
+				document.getElementById("b1").style.backgroundColor = "#ebfaca";
+				if (user[3] === user[2]) {
+					document.getElementById("bb1").style.backgroundColor = "#ebfaca";
+					alert(`Добро пожаловать, ${log.value}!`);
+					email.value = null;
+					log.value = null;
+					pass.value = null;
+					pass1.value = null;
+					document.location.href = "Index.html";
+				}
+				else {
+					alert("Пароль не совпадает!")
+					document.getElementById("bb1").style.backgroundColor = "red";
+					pass1.value = null;
+				}
+			}
+			else {
+				alert("Придумайте пароль!")
+				document.getElementById("b1").style.backgroundColor = "red";
+			}
+		}
+		else {
+			alert("Придумайте логин!")
+			document.getElementById("a1").style.backgroundColor = "red";
+		}
+	}
+	else {
+		alert("Введите e-mail!");
+		document.getElementById("e1").style.backgroundColor = "red";
 	}
 }
 

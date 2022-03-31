@@ -13,50 +13,47 @@
 			<nav class="navbar navbar-light bg">
 				<div class="container-fluid">
 				<a class="navbar-brand" href="Index.html">
-				<h1 class="label"> <span class="sb">ReMind</span> <span class="sb" style="animation-delay: 0.25s">— do</span> <span class="sb" style="animation-delay: 0.5s">more and</span> <span class="sb" style="animation-delay: 1s">save more</span> <span class="sb" style="animation-delay: 1.25s">with us!</span> </h1>
+				<h1 class="label"> <span class="sb">ReMind</span> <span class="sb" style="animation-delay: 0.5s">— do</span> <span class="sb" style="animation-delay: 0.75s">more and</span> <span class="sb" style="animation-delay: 1s">save more</span> <span class="sb" style="animation-delay: 1.25s">with us!</span> </h1>
 				</a>
 				</div>
 			</nav>
 		</header>
 		<div class="wrapper end">
 			<div style="animation:move; animation-duration: 2s;">
-				<h2 class="sb label"> О сайте </h2>
+				<h2 class="sb label-l"> О сайте </h2>
 				<ul>
-				<li class="addit"><a href="WebInfo.html">Соглашения</a></li>
-				<li class="addit"><a class="addit" href="WebInfo.html">Задачи</a></li>
-				<li class="addit"><a class="addit" href="WebInfo.html">Отзывы</a></li>
+				<li class="addit"><a class="clr" href="WebInfo.html">Соглашения</a></li>
+				<li class="addit"><a class="clr" href="WebInfo.html">Задачи</a></li>
+				<li class="addit"><a class="clr" href="WebInfo.html">Отзывы</a></li>
 				</ul>
 			</div>
 			<div>
-			<h2 class="sb label">FAQ — Frequently Asked Questions</h2>
+			<h2 class="sb label-l">FAQ — Frequently Asked Questions</h2>
 			<ol>
-					<li class="addit"> <a href="FAQ.html"> Требуется ли какая-нибудь плата? </a> </li>
-					<li class="addit"> <a href="FAQ.html"> Зачем нужен ReMind? </a> </li>
-					<li class="addit"> <a href="FAQ.html"> О чём можно писать </a> </li>
-					<li class="addit"> <a href="FAQ.html"> Видят ли мои записи другие пользователи?</a> </li>
-					<li class="addit"> <a href="FAQ.html"> С чего начать? </a></li>
+					<li class="addit"> <a class="clr" href="FAQ.html"> Требуется ли какая-нибудь плата? </a> </li>
+					<li class="addit"> <a class="clr" href="FAQ.html"> Зачем нужен ReMind? </a> </li>
+					<li class="addit"> <a class="clr" href="FAQ.html"> О чём можно писать </a> </li>
+					<li class="addit"> <a class="clr" href="FAQ.html"> Видят ли мои записи другие пользователи?</a> </li>
+					<li class="addit"> <a class="clr" href="FAQ.html"> С чего начать? </a></li>
 			</ol>
 			</div>
 			<div>
-				<h2 class="sb label" align="right" style="margin-right:30px;"> Вход и регистрация </h2>
-					<div class="wrapper-c" align="left" title="Пожалуйста, введите логин и пароль">
+				<h2 class="sb label-l" align="right" style="margin-right:30px;"> Вход и регистрация </h2>
+					<div id="log-bl" class="wrapper-c" align="left" title="Пожалуйста, введите логин и пароль">
 					<div class="input-group input-group input-group-sm mb-3"><span id="a1" class="login input-group-text"> Логин: </span> <input class="form-control" id="a" maxlength="20" size="18" align="right"/> </div>
 					<div class="input-group input-group-sm mb-3"><span id="b1" class="login input-group-text"> Пароль: </span> <input class="form-control" id="b" type="password" maxlength="20" size="18" align="right"/> </div>
 					</div>
-					<button type="submit" class="btn btn-outline-primary" onclick="get()" class="bl" title="Отправить!"> Войти </button> <br>
-					<div class="wrapper">
-						<span title="Если вы забыли пароль"> <a href="#"> Не помню пароль </a> </span>
-						<span title="Если вы в первый раз"> <a href="#"> Регистрация </a> </span>
-					</div>
+					<button id="lg-btn" type="submit" class="btn btn-outline-success" onclick="login()" class="bl" title="Отправить!"> Войти </button> <br>
+					<span id="rg" title="Если вы в первый раз"> <a class="clr" href="Reg.html"> Регистрация </a> </span>
 			</div>
 		</div>
-		<form class="end">
+		<form id="frm" class="end" title="Для доступа к заметкам войдите или зарегистрируйтесь!">
 		<div class="input-group">
-			<input id="NoteHead" type="text" class="form-control" placeholder="Название заметки...">
-			<a onclick="note()" tabindex="0" class="btn btn-outline-success" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" title="Success!" data-bs-content="Вы успешно сохранили вашу заметку!">Сохранить</a>
-			<button class="btn btn-outline-primary" type="reset">Очистить</button>
+			<input id="NoteHead" type="text" class="form-control" placeholder="Название заметки..." disabled>
+			<button id="f-btn-1" onclick="note()" type="button" class="btn btn-success" disabled>Сохранить</button>
+			<button id="f-btn-2" class="btn btn-warning" type="reset" disabled>Очистить</button>
 		</div>
-		<textarea id = "NoteText" type="text" class="form-control" rows="20" placeholder="Ваши мысли..." aria-label="Text-area"></textarea>
+		<textarea id = "NoteText" type="text" class="form-control" rows="20" placeholder="Ваши мысли..." aria-label="Text-area" disabled></textarea>
 		</form>
 		<div class="container-fluid cent end">
 			<h2 class="btn btn-primary sb border border-1 border-secondary login rounded" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" align="center">  
@@ -79,15 +76,6 @@
 	var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
 	var collapseList = collapseElementList.map(function (collapseEl) {
 	return new bootstrap.Collapse(collapseEl)})
-	
-	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-	var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-	return new bootstrap.Popover(popoverTriggerEl)
-	})
-	
-	var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
-		trigger: 'focus'
-	})
 	</script>
 	</body>
 </html>
