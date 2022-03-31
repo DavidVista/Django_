@@ -49,11 +49,15 @@
 		</div>
 		<form id="frm" class="end" title="Для доступа к заметкам войдите или зарегистрируйтесь!">
 		<div class="input-group">
-			<input id="NoteHead" type="text" class="form-control" placeholder="Название заметки..." disabled>
-			<button id="f-btn-1" onclick="note()" type="button" class="btn btn-success" disabled>Сохранить</button>
-			<button id="f-btn-2" class="btn btn-warning" type="reset" disabled>Очистить</button>
+			<button class="f btn btn-warning" type="reset" disabled>Размер</button>
+			<button class="f btn btn-warning" type="reset" disabled>Тема</button>
+			<button class="f btn btn-warning" type="reset" disabled>Шрифт</button>
+			<button class="f btn btn-warning" type="reset" disabled>Задний фон</button>
+			<input id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." disabled />
+			<button onclick="note()" type="button" class="f btn btn-success" disabled>Сохранить</button>
+			<button class="f btn btn-warning" type="reset" disabled>Очистить</button>
 		</div>
-		<textarea id = "NoteText" type="text" class="form-control" rows="20" placeholder="Ваши мысли..." aria-label="Text-area" disabled></textarea>
+		<textarea id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..." aria-label="Text-area" disabled></textarea>
 		</form>
 		<div class="container-fluid cent end">
 			<h2 class="btn btn-primary sb border border-1 border-secondary login rounded" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" align="center">  

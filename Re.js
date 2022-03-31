@@ -7,44 +7,45 @@ function login() {
 	log = document.getElementById("a").value;
 	pass = document.getElementById("b").value;
 	user = [log, pass];
-	if (user[0] != "") {
+	if (user[0] != "")  {
 		document.getElementById("a1").style.backgroundColor = "#ebfaca";
 		if (user[1] != "") {
-		alert(`Добро пожаловать, ${log}!`);
-		document.getElementById("b1").style.backgroundColor = "#ebfaca";
-		document.getElementById("a1").innerText = "Логин " + log;
+			alert(`Добро пожаловать, ${log}!`);
+			document.getElementById("b1").style.backgroundColor = "#ebfaca";
+			document.getElementById("a1").innerText = "Логин " + log;
 		
-		document.getElementById("a").remove();
-		document.getElementById("b").remove();
-		document.getElementById("b1").remove();
-		document.getElementById("lg-btn").remove();
-		document.getElementById("rg").remove();
+			document.getElementById("a").remove();
+			document.getElementById("b").remove();
+			document.getElementById("b1").remove();
+			document.getElementById("lg-btn").remove();
+			document.getElementById("rg").remove();
 		
-		document.getElementById("log-bl").align = "center";
-		var b = document.createElement("button");
-		b.className = "btn btn-light";
-		b.innerText = "Аккаунт";
-		document.getElementById("log-bl").appendChild(b);
+			document.getElementById("log-bl").align = "center";
+			var b = document.createElement("button");
+			b.className = "btn btn-light";
+			b.innerText = "Аккаунт";
+			document.getElementById("log-bl").appendChild(b);
 		
-		if (document.location.href === "file:///C:/Python%2038/PyProjects/Django_/Index.html") {
-		document.getElementById("frm").title= "Приятного пользования!";
-		document.getElementById("NoteHead").disabled = false;
-		document.getElementById("f-btn-1").disabled = false;
-		document.getElementById("f-btn-2").disabled = false;
-		document.getElementById("NoteText").disabled = false;
+			if (document.location.href === "file:///C:/Python%2038/PyProjects/Django_/Index.html") {
+				document.getElementById("frm").title= "Приятного пользования!";
+		
+				var lst = document.getElementsByClassName("f");
+				for (var i = 0; i < 8; i++) {
+					lst[i].disabled = false;
+				}
+				}
 		}
 		
-		}
 		else {
 			alert("Введите пароль!");
-			document.getElementById("b1").style.backgroundColor = "red";
+			document.getElementById("b1").style.backgroundColor = "red";}
 		}
-	}
+	
 	else {
 		alert("Введите логин!");
-		document.getElementById("a1").style.backgroundColor = "red";
-	}
+		document.getElementById("a1").style.backgroundColor = "red";}
 }
+
 
 function note() {
 	var head = document.getElementById("NoteHead").value;
@@ -135,4 +136,3 @@ function reg() {
 		document.getElementById("e1").style.backgroundColor = "red";
 	}
 }
-
