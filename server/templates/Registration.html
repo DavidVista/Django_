@@ -3,22 +3,28 @@
 {% block content %}
 
 <div class="container-fluid end">
-    <div class="block-xxl wrapper-c">
+    {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <form method="POST" class="block-xxl wrapper-c">
+        {% csrf_token %}
         <h1 class="label-l"> Регистрация </h1>
         <div class="wrapper-c" align="left" title="Пожалуйста, введите логин и пароль">
             <div class="input-group input-group input-group-sm mb-3"><span id="e1" class="login input-group-text"> E-mail: </span>
-                <input class="form-control" id="e" maxlength="20" size="18" align="right"/></div>
+                <input type="email" id="email" name="email" class="form-control" maxlength="20" size="18" align="right"/></div>
             <div class="input-group input-group input-group-sm mb-3"><span id="a1" class="login input-group-text"> Логин: </span>
-                <input class="form-control" id="a" maxlength="20" size="18" align="right"/></div>
+                <input type="text" id="username" name="username" class="form-control" maxlength="20" size="18" align="right"/></div>
             <div class="input-group input-group-sm mb-3"><span id="b1" class="login input-group-text"> Пароль: </span>
-                <input class="form-control" id="b" type="password" maxlength="20" size="18" align="right"/></div>
+                <input type="password" id="password1" name="password1" class="form-control" maxlength="20" size="18" align="right"/></div>
             <div class="input-group input-group-sm mb-3"><span id="bb1" class="login input-group-text"> Подтведите пароль: </span>
-                <input class="form-control" id="bb" type="password" maxlength="20" size="18" align="right"/></div>
+                <input type="password" id="password2" name="password2" class="form-control" maxlength="20" size="18" align="right"/></div>
         </div>
-        <button class="btn btn-outline-primary" onclick="reg()" class="bl" title="Отправить!"> Зарегистрироваться!
-        </button>
-        <br>
-    </div>
+        <button type="submit" class="btn btn-outline-primary bl" title="Отправить!"> Зарегистрироваться!</button>
+        <a class="btn btn-outline-secondary bl" type="button" href="#"> Вход </a>
+    </form>
 </div>
 
 {% endblock %}
