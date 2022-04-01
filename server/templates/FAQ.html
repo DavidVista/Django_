@@ -1,14 +1,15 @@
-{% extends 'Index.html %}
+{% extends 'Index.html' %}
 {% load static %}
+
 {% block content %}
 
 <div class="end">
-    <h1 class="label-l">О сайте</h1>
+    <h1 class="label-l">FAQ — Frequently Asked Questions </h1>
     <div class="wrapper-c end">
 
         <div>
             <h3 class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapse1" role="button"
-                aria-expanded="false" aria-controls="collapse1">Соглашения</h3>
+                aria-expanded="false" aria-controls="collapse1">Требуется ли какая-нибудь плата?</h3>
             <div class="collapse" id="collapse1">
                 <div class="card card-body">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet
@@ -22,7 +23,7 @@
 
         <div>
             <h3 class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapse2" role="button"
-                aria-expanded="false" aria-controls="collapse2">Задачи ReMind</h3>
+                aria-expanded="false" aria-controls="collapse2">Зачем нужен ReMind?</h3>
             <div class="collapse" id="collapse2">
                 <div class="card card-body">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet
@@ -36,8 +37,36 @@
 
         <div>
             <h3 class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapse3" role="button"
-                aria-expanded="false" aria-controls="collapse3">Отзывы</h3>
+                aria-expanded="false" aria-controls="collapse3">О чём можно писать?</h3>
             <div class="collapse" id="collapse3">
+                <div class="card card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet
+                    vestibulum est condimentum id. Integer tempus nec diam in faucibus. Integer tellus quam,
+                    sollicitudin eu nulla a, eleifend finibus augue. Etiam sit amet lectus imperdiet, tincidunt sapien
+                    eget, rutrum quam. Nulla varius est dui, at maximus augue laoreet aliquam. Quisque pharetra ante
+                    justo, sed venenatis ipsum placerat semper. Sed et eleifend odio.
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapse4" role="button"
+                aria-expanded="false" aria-controls="collapse4">Видят ли мои записи другие пользователи?</h3>
+            <div class="collapse" id="collapse4">
+                <div class="card card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet
+                    vestibulum est condimentum id. Integer tempus nec diam in faucibus. Integer tellus quam,
+                    sollicitudin eu nulla a, eleifend finibus augue. Etiam sit amet lectus imperdiet, tincidunt sapien
+                    eget, rutrum quam. Nulla varius est dui, at maximus augue laoreet aliquam. Quisque pharetra ante
+                    justo, sed venenatis ipsum placerat semper. Sed et eleifend odio.
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapse5" role="button"
+                aria-expanded="false" aria-controls="collapse5">С чего начать?</h3>
+            <div class="collapse" id="collapse5">
                 <div class="card card-body">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque congue est, sit amet
                     vestibulum est condimentum id. Integer tempus nec diam in faucibus. Integer tellus quam,
@@ -55,5 +84,11 @@
     <p> ReMind </p>
     <p> Приятного пользования </p>
 </div>
+<script>
+	var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
+	var collapseList = collapseElementList.map(function (collapseEl) {
+	return new bootstrap.Collapse(collapseEl)})
+</script>
+
 
 {% endblock %}

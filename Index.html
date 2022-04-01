@@ -39,34 +39,7 @@
 			</div>
 			<div>
 				<h2 class="sb label-l" align="right" style="margin-right:30px;"> Вход и регистрация </h2>
-					<div id="log-bl" class="wrapper-c" align="left" title="Пожалуйста, введите логин и пароль">
-					<div class="input-group input-group input-group-sm mb-3"><span id="a1" class="login input-group-text"> Логин: </span> <input class="form-control" id="a" maxlength="20" size="18" align="right"/> </div>
-					<div class="input-group input-group-sm mb-3"><span id="b1" class="login input-group-text"> Пароль: </span> <input class="form-control" id="b" type="password" maxlength="20" size="18" align="right"/> </div>
-					</div>
-					<button id="lg-btn" type="submit" class="btn btn-outline-success" onclick="login()" class="bl" title="Отправить!"> Войти </button> <br>
-					<span id="rg" title="Если вы в первый раз"> <a class="clr" href="Reg.html"> Регистрация </a> </span>
-			</div>
-		</div>
-		<form id="frm" class="end" title="Для доступа к заметкам войдите или зарегистрируйтесь!">
-		<div class="input-group">
-			<button class="f btn btn-warning" type="reset" disabled>Размер</button>
-			<button class="f btn btn-warning" type="reset" disabled>Тема</button>
-			<button class="f btn btn-warning" type="reset" disabled>Шрифт</button>
-			<button class="f btn btn-warning" type="reset" disabled>Задний фон</button>
-			<input id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." disabled />
-			<button onclick="note()" type="button" class="f btn btn-success" disabled>Сохранить</button>
-			<button class="f btn btn-warning" type="reset" disabled>Очистить</button>
-		</div>
-		<textarea id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..." aria-label="Text-area" disabled></textarea>
-		</form>
-		<div class="container-fluid cent end">
-			<h2 class="btn btn-primary sb border border-1 border-secondary login rounded" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" align="center">  
-			Список записей
-			</h2>
-			<div class="collapse" id="collapseExample">
-				<div class="card card-body">
-				<ul id="list"></ul>
-				</div>
+				<div class="wrapper-c"> <button class="btn btn-outline-primary bl">Регистрация</button> <button class="btn btn-outline-success bl">Вход</button> </div>
 			</div>
 		</div>
 		<hr>
@@ -81,5 +54,12 @@
 	var collapseList = collapseElementList.map(function (collapseEl) {
 	return new bootstrap.Collapse(collapseEl)})
 	</script>
+	
+	<script> window.onload = function() {
+		document.getElementById("f1").addEvenListener("click", SetFont("f1"));
+		document.getElementById("f2").addEvenListener("click", SetFont("f2"));
+		document.getElementById("f3").addEvenListener("click", SetFont("f3"));
+		document.getElementById("f4").addEvenListener("click", SetFont("f4"));} 
+		</script>
 	</body>
 </html>

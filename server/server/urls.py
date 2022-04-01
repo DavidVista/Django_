@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from reapp.views import main_page
+
+from reapp.views import main_page, faq_page, info_page
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', main_page)
-]
+    path('admin/', admin.site.urls, name="admin"),
+    path('', main_page, name=""),
+    path('faq/', faq_page, name="faq"),
+    path('info/', info_page, name="info")
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
