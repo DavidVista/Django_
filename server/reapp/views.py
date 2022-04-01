@@ -14,3 +14,7 @@ def faq_page(request):
 
 def info_page(request):
     return render(request, "Info.html")
+
+
+def registration_page(request):
+    return render(request, "Registration.html")
