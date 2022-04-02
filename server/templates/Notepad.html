@@ -17,34 +17,23 @@
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                Шрифт
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a id="f1" class="btn dropdown-item"> Vollkorn </a></li>
-                <li><a id="f2" class="btn dropdown-item"> Red Hat Mono </a></li>
-                <li><a id="f3" class="btn dropdown-item"> Roboto Slab </a></li>
-                <li><a id="f4" class="btn dropdown-item"> Open Sans </a></li>
-            </ul>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                Толщина
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><input id="f_weight" class="form-control dropdown-item" type="number" value="400" min="400"
-                           max="600" href="#"/></li>
-                <li><a onclick="ChangeFontWeight" class="btn dropdown-item">Ок</a></li>
-            </ul>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
                 Тип
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="btn dropdown-item"> Regular </a></li>
-                <li><a class="btn dropdown-item"> Italic </a></li>
+                <li><a onclick="ChangeToBold()" class="btn dropdown-item"> Bold </a></li>
+                <li><a onclick="ChangeToItalic()" class="btn dropdown-item"> Italic </a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Шрифт
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a onclick="ChangeToVollkorn()" class="btn dropdown-item"> Vollkorn </a></li>
+                <li><a onclick="ChangeToRedHatMono()" class="btn dropdown-item"> Red Hat Mono </a></li>
+                <li><a onclick="ChangeToRobotoSlab()" class="btn dropdown-item"> Roboto Slab </a></li>
+                <li><a onclick="ChangeToOpenSans()" class="btn dropdown-item"> Open Sans </a></li>
             </ul>
         </div>
         <div class="dropdown">
@@ -77,4 +66,54 @@
         </div>
     </div>
 </div>
+
+<script>
+var bd = 0;
+var it = 0;
+
+function ChangeFontSize() {
+	var size = document.getElementById("f_size").value;
+	document.getElementById("NoteText").style.fontSize = size + "px";
+}
+
+function ChangeToBold() {
+    if (bd===0) {
+	document.getElementById("NoteText").style.fontWeight = "bold";
+	bd = 1;
+	}
+	else {
+	    document.getElementById("NoteText").style.fontWeight = "normal";
+	    bd = 0;
+	}
+}
+
+function ChangeToItalic() {
+	if (it===0) {
+	document.getElementById("NoteText").style.fontStyle = "italic";
+	it = 1;
+	}
+	else {
+	    document.getElementById("NoteText").style.fontStyle = "normal";
+	    it = 0;
+	}
+}
+
+function ChangeToVollkorn() {
+    document.getElementById("NoteText").style.fontFamily = 'Vollkorn';
+}
+
+function ChangeToRedHatMono() {
+    document.getElementById("NoteText").style.fontFamily = 'Red Hat Mono';
+}
+
+function ChangeToRobotoSlab() {
+    document.getElementById("NoteText").style.fontFamily = 'Roboto Slab';
+}
+
+function ChangeToOpenSans() {
+    document.getElementById("NoteText").style.fontFamily = 'Open Sans';
+}
+
+</script>
+
 {% endblock %}

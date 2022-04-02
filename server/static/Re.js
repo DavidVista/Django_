@@ -142,18 +142,3 @@ function reg() {
 		document.getElementById("e1").style.backgroundColor = "red";
 	}
 }
-
-function ChangeFontSize() {
-	var size = document.getElementById("f_size").value;
-	document.getElementById("NoteText").style.fontSize = size + "px";
-}
-
-function ChangeFontWeight() {
-	var weight = document.getElementById("f_weight").value;
-	document.getElementById("NoteText").style.fontWeight = weight + "px";
-}
-
-function SetFont(x) {
-	font = x;
-	alert(font);
-}
