@@ -1,7 +1,7 @@
 {% extends 'Index.html' %}
 {% load static %}
 {% block content %}
-<form method="POST" id="frm" class="end" title="Для доступа к заметкам войдите или зарегистрируйтесь!">
+<form method="POST" action="{% url 'notepad' %}" id="frm" class="end" title="Для доступа к заметкам войдите или зарегистрируйтесь!">
     {% csrf_token %}
     <div class="input-group">
         <div class="dropdown">
@@ -10,7 +10,7 @@
                 Размер
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><input id="f_size" class="form-control dropdown-item" type="number" value="16" min="12" max="98" name="font-size"/></li>
+                <li><input id="f_size" class="form-control dropdown-item" type="number" value="{{ font-size }}" min="12" max="98" name="font-size"/></li>
                 <li><a onclick="ChangeFontSize()" class="btn dropdown-item">Ок</a></li>
             </ul>
         </div>
@@ -19,6 +19,31 @@
                     data-bs-toggle="dropdown" aria-expanded="false">
                 Тип
             </button>
+            {% if is_bold and is_italic %}
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
+                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" checked /> <label class="form-check-label" for="bold">Bold</label></div>
+                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" checked /> <label class="form-check-label" for="italic"> Italic </label></div>
+                </li>
+            </ul>
+            {% elif is_bold and not is_italic %}
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
+                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" checked/> <label class="form-check-label" for="bold">Bold</label></div>
+                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="italic"> Italic </label></div>
+                </li>
+            </ul>
+            {% elif not is_bold and is_italic %}
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
+                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="bold">Bold</label></div>
+                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" checked/> <label class="form-check-label" for="italic"> Italic </label></div>
+                </li>
+            </ul>
+            {% else %}
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
                     <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
@@ -26,6 +51,7 @@
                     <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="italic"> Italic </label></div>
                 </li>
             </ul>
+            {% endif %}
         </div>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -34,10 +60,10 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="Vollkorn" type="radio" id="Vollkorn" onclick="ChangeToVollkorn()" class="form-check-input" name="font-family" checked /> <label for="Vollkorn">Vollkorn </label> </div>
-                    <div class="form-check"><input value="Red Hat Mono" type="radio" id="RedHatMono" onclick="ChangeToRedHatMono()" class="form-check-input" name="font-family" /> <label for="RedHatMono"> Red Hat Mono </label> </div>
-                    <div class="form-check"><input value="Roboto Slab" type="radio" id="RobotoSlab" onclick="ChangeToRobotoSlab()" class="form-check-input" name="font-family" /> <label for="RobotoSlab"> Roboto Slab </label> </div>
-                    <div class="form-check"><input value="Open Sans" type="radio" id="OpenSans" onclick="ChangeToOpenSans()" class="form-check-input" name="font-family" /> <label for="OpenSans"> Open Sans </label> </div>
+                    <div class="form-check"><input value="Vollkorn" type="radio" id="Vollkorn" onclick="ChangeToVollkorn()" class="form-check-input" name="font-family" {% if font-family == 'Vollkorn' %} checked {% endif %} /> <label for="Vollkorn">Vollkorn </label> </div>
+                    <div class="form-check"><input value="Red Hat Mono" type="radio" id="RedHatMono" onclick="ChangeToRedHatMono()" class="form-check-input" name="font-family" {% if font-family == 'Red Hat Mono' %} checked {% endif %} /> <label for="RedHatMono"> Red Hat Mono </label> </div>
+                    <div class="form-check"><input value="Roboto Slab" type="radio" id="RobotoSlab" onclick="ChangeToRobotoSlab()" class="form-check-input" name="font-family" {% if font-family == 'Roboto Slab' %} checked {% endif %} /> <label for="RobotoSlab"> Roboto Slab </label> </div>
+                    <div class="form-check"><input value="Open Sans" type="radio" id="OpenSans" onclick="ChangeToOpenSans()" class="form-check-input" name="font-family" /> {% if font-family == 'Open Sans' %} checked {% endif %} <label for="OpenSans"> Open Sans </label> </div>
                 </li>
             </ul>
         </div>
@@ -48,19 +74,19 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="Light" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" checked/> <label for="Light"> Light </label> </div>
-                    <div class="form-check"><input value="Dark" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" /> <label for="Dark"> Dark </label> </div>
-                    <div class="form-check"><input value="Monokai" type="radio" id=Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" /> <label for="Monokai"> Monokai </label> </div>
-                    <div class="form-check"><input value="Chocolate" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" /> <label for="Chocolate"> Chocolate </label> </div>
+                    <div class="form-check"><input value="Light" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" {% if theme == 'Light' %} checked {% endif %}/> <label for="Light"> Light </label> </div>
+                    <div class="form-check"><input value="Dark" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" {% if theme == 'Dark' %} checked {% endif %} /> <label for="Dark"> Dark </label> </div>
+                    <div class="form-check"><input value="Monokai" type="radio" id=Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" {% if theme == 'Monokai' %} checked {% endif %} /> <label for="Monokai"> Monokai </label> </div>
+                    <div class="form-check"><input value="Chocolate" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" {% if theme == 'Chocolate' %} checked {% endif %} /> <label for="Chocolate"> Chocolate </label> </div>
                 </li>
             </ul>
         </div>
-        <input name="header" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..."/>
+        <input name="header" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ header }}"/>
         <button type="submit" class="f btn btn-success">Сохранить</button>
         <button class="f btn btn-warning" type="reset">Очистить</button>
     </div>
     <textarea name="text" id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..."
-              aria-label="Text-area"></textarea>
+              aria-label="Text-area" value="{{ text }}"></textarea>
 </form>
 <div class="container-fluid cent end">
     <h2 class="btn btn-primary sb border border-1 border-secondary login rounded" data-bs-toggle="collapse"
@@ -72,7 +98,7 @@
             <ul id="list">
                 {% for text in texts %}
                 {% if text.user.username == username %}
-                <form method="POST" class="addit"> {% csrf_token %} <button type="submit" class="clr"> {{ text.name }} - [changed in {{ text.date_of_recent_change }}] [Created in {{text.date_of_creation}}] </button> </form>
+                <form method="POST" action="{% url 'note' %}" class="addit"> {% csrf_token %} <button type="submit" class="clr"> {{ text.name }} - [changed in {{ text.date_of_recent_change }}] [Created in {{text.date_of_creation}}] </button> </form>
                 {% endif %}
                 {% endfor %}
             </ul>

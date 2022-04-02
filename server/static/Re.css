@@ -57,6 +57,10 @@ a {
 	justify-content: center;
 }
 
+.f {
+    font-family: 'Vollkorn';
+}
+
 .field {
 	width: 50%;
 }
