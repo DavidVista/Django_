@@ -10,7 +10,7 @@
                 Размер
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><input id="f_size" class="form-control dropdown-item" type="number" value="{{ font-size }}" min="12" max="98" name="font-size"/></li>
+                <li><input id="f_size" class="form-control dropdown-item" type="number" value="{{ font_size }}" min="12" max="98" name="font-size"/></li>
                 <li><a onclick="ChangeFontSize()" class="btn dropdown-item">Ок</a></li>
             </ul>
         </div>
@@ -60,10 +60,10 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="Vollkorn" type="radio" id="Vollkorn" onclick="ChangeToVollkorn()" class="form-check-input" name="font-family" {% if font-family == 'Vollkorn' %} checked {% endif %} /> <label for="Vollkorn">Vollkorn </label> </div>
-                    <div class="form-check"><input value="Red Hat Mono" type="radio" id="RedHatMono" onclick="ChangeToRedHatMono()" class="form-check-input" name="font-family" {% if font-family == 'Red Hat Mono' %} checked {% endif %} /> <label for="RedHatMono"> Red Hat Mono </label> </div>
-                    <div class="form-check"><input value="Roboto Slab" type="radio" id="RobotoSlab" onclick="ChangeToRobotoSlab()" class="form-check-input" name="font-family" {% if font-family == 'Roboto Slab' %} checked {% endif %} /> <label for="RobotoSlab"> Roboto Slab </label> </div>
-                    <div class="form-check"><input value="Open Sans" type="radio" id="OpenSans" onclick="ChangeToOpenSans()" class="form-check-input" name="font-family" /> {% if font-family == 'Open Sans' %} checked {% endif %} <label for="OpenSans"> Open Sans </label> </div>
+                    <div class="form-check"><input value="Vollkorn" type="radio" id="Vollkorn" onclick="ChangeToVollkorn()" class="form-check-input" name="font-family" {% if font_family == 'Vollkorn' %} checked {% endif %} /> <label for="Vollkorn">Vollkorn </label> </div>
+                    <div class="form-check"><input value="Red Hat Mono" type="radio" id="RedHatMono" onclick="ChangeToRedHatMono()" class="form-check-input" name="font-family" {% if font_family == 'Red Hat Mono' %} checked {% endif %} /> <label for="RedHatMono"> Red Hat Mono </label> </div>
+                    <div class="form-check"><input value="Roboto Slab" type="radio" id="RobotoSlab" onclick="ChangeToRobotoSlab()" class="form-check-input" name="font-family" {% if font_family == 'Roboto Slab' %} checked {% endif %} /> <label for="RobotoSlab"> Roboto Slab </label> </div>
+                    <div class="form-check"><input value="Open Sans" type="radio" id="OpenSans" onclick="ChangeToOpenSans()" class="form-check-input" name="font-family" /> {% if font_family == 'Open Sans' %} checked {% endif %} <label for="OpenSans"> Open Sans </label> </div>
                 </li>
             </ul>
         </div>
@@ -81,7 +81,7 @@
                 </li>
             </ul>
         </div>
-        <input name="header" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ header }}"/>
+        <input name="header" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ name }}"/>
         <button type="submit" class="f btn btn-success">Сохранить</button>
         <button class="f btn btn-warning" type="reset">Очистить</button>
     </div>

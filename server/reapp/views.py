@@ -74,20 +74,20 @@ def logout_page(request):
 
 def notepad(request):
     if request.user.is_authenticated:
-        print("Hi")
         form = TextForm()
-        # texts = Text.objects.all()
         if request.method == "POST":
-            if request.POST.get("font-type") == ["reg"]:
+            print(request.POST)
+            print(request.POST.get("font-type"))
+            if request.POST.get("font-type", "reg") == "reg":
                 a = "reg"
                 is_bold = False
                 is_italic = False
-            elif request.POST.get("font-type") == ["reg", "bold"]:
+            elif request.POST.get("font-type", "reg") == "bold":
                 a = "bold"
                 is_bold = True
                 is_italic = False
-            elif request.POST.get("font-type") == ["reg", "italic"]:
-                a = "ital"
+            elif request.POST.get("font-type", "reg") == "italic":
+                a = "italic"
                 is_bold = False
                 is_italic = True
             else:
@@ -102,31 +102,14 @@ def notepad(request):
                 b = "black red"
             else:
                 b = "brown yellow"
-            """
             form = TextForm(
-                name=request.POST.get("header"),
-                text=request.POST.get("text"),
-                date_of_creation="",
-                date_of_recent_change="",
-                font_size=request.POST.get("font-size"),
-                font_family=request.POST.get("font-family")[0],
-                font_type=a,
-                theme_type=request.POST.get("theme")
+                data={"name": request.POST.get("name"),
+                      "text": request.POST.get("text"),
+                      "font_size": request.POST.get("font-size"),
+                      "font_family": request.POST.get("font-family"),
+                      "font_type": a,
+                      "theme_type": b}
             )
-            """
-            print(User.objects.get(username=request.user.username))
-            form.name = request.POST.get("header")
-            print(request.POST.get("header"))
-            form.text = request.POST.get("text")
-            print(request.POST.get("text"))
-            form.font_size = int(request.POST.get("font-size"))
-            print(int(request.POST.get("font-size")))
-            form.font_family = request.POST.get("font-family")
-            print(request.POST.get("font-family"))
-            form.font_type = a
-            print(a)
-            form.theme_type = b
-            print(b)
             if form.is_valid():
                 text = form.save(commit=False)
                 text.user = request.user
@@ -134,7 +117,7 @@ def notepad(request):
                 print("I'm here!")
                 return render(request, 'Note.html',
                               {
-                                  'font-size': request.POST.get("font-size"),
+                                  'font_size': request.POST.get("font-size"),
                                   'is_bold': is_bold, 'is_italic': is_italic,
                                   'font-family': request.POST.get("font-family")[0],
                                   'theme': request.POST.get("theme"),
@@ -148,7 +131,8 @@ def notepad(request):
                               )
             else:
                 print(form.errors.as_data())
-        return render(request, 'Notepad.html', {'user': request.user, 'username': request.user.username, 'authenticated': True})
+        return render(request, 'Notepad.html',
+                      {'user': request.user, 'username': request.user.username, 'authenticated': True})
 
 
 def note(request):

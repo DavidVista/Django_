@@ -21,7 +21,6 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
                     <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="bold">Bold</label></div>
                     <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="italic"> Italic </label></div>
                 </li>
@@ -55,7 +54,7 @@
                 </li>
             </ul>
         </div>
-        <input name="header" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..."/>
+        <input name="name" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..."/>
         <button type="submit" class="f btn btn-success">Сохранить</button>
         <button class="f btn btn-warning" type="reset">Очистить</button>
     </div>

@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Text(models.Model):
     THEME = (
-        ('while black', 'Light'),
+        ('white black', 'Light'),
         ('black white', 'Dark'),
         ('black red', 'Monokai'),
         ('brown yellow', 'Chocolate')
@@ -22,7 +22,7 @@ class Text(models.Model):
         ('Open Sans', 'Open Sans'),
         ('Roboto Slab', 'Roboto Slab')
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     name = models.CharField(max_length=255)  # name varchar(255)
     text = models.TextField(null=True, blank=True)
     # date_of_creation = models.DateField(null=True)
