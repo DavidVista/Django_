@@ -12,7 +12,8 @@
     <form method="POST" class="block-xxl wrapper-c">
         {% csrf_token %}
         <h1 class="label-l"> Регистрация </h1>
-        <div class="wrapper-c" align="left" title="Пожалуйста, введите логин и пароль">
+        <div class="container-fluid" align="center" title="Пожалуйста, введите логин и пароль">
+            <div class="wrapper-c field">
             <div class="input-group input-group input-group-sm mb-3"><span id="e1" class="login input-group-text"> E-mail: </span>
                 <input type="email" id="email" name="email" class="form-control" maxlength="20" size="18" align="right"/></div>
             <div class="input-group input-group input-group-sm mb-3"><span id="a1" class="login input-group-text"> Логин: </span>
@@ -21,9 +22,10 @@
                 <input type="password" id="password1" name="password1" class="form-control" maxlength="20" size="18" align="right"/></div>
             <div class="input-group input-group-sm mb-3"><span id="bb1" class="login input-group-text"> Подтведите пароль: </span>
                 <input type="password" id="password2" name="password2" class="form-control" maxlength="20" size="18" align="right"/></div>
+            <div><button type="submit" class="btn btn-outline-primary bl" title="Отправить!"> Зарегистрироваться!</button></div>
+            <div><a class="btn btn-outline-secondary bl" type="button" href="{% url 'login' %}"> Вход </a> </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary bl" title="Отправить!"> Зарегистрироваться!</button>
-        <a class="btn btn-outline-secondary bl" type="button" href="#"> Вход </a>
     </form>
 </div>
 

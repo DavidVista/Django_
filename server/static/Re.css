@@ -14,7 +14,7 @@ body {
 }
 
 span.input-group-text {
-	background-color: #ebfaca;
+    background-color: #ebfaca;
 }
 
 .bg {
@@ -53,8 +53,13 @@ a {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 }
+
+.field {
+	width: 50%;
+}
+
 
 .login {
 	font-size: 18px;

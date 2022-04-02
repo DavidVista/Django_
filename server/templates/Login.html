@@ -13,15 +13,16 @@
     <form method="POST" class="block-xxl wrapper-c">
         {% csrf_token %}
         <h1 class="label-l"> Вход </h1>
-        <div class="wrapper-c" align="left" title="Пожалуйста, введите логин и пароль">
+        <div class="contrainer-fluid" align="center" title="Пожалуйста, введите логин и пароль">
+            <div class="wrapper-c field">
             <div class="input-group input-group input-group-sm mb-3"><span id="a1" class="login input-group-text"> Логин: </span>
                 <input type="text" id="username" name="username" class="form-control" maxlength="20" size="18" align="right"/></div>
             <div class="input-group input-group-sm mb-3"><span id="b1" class="login input-group-text"> Пароль: </span>
                 <input type="password" id="password" name="password" class="form-control" maxlength="20" size="18" align="right"/></div>
+            <div><button type="submit" class="btn btn-outline-primary bl" title="Отправить!"> Войти!</button> </div>
+            <div><a class="btn btn-outline-secondary bl" type="button" href="{% url 'registration' %}"> Регистрация </a></div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary bl" title="Отправить!"> Войти!</button>
-        <a class="btn btn-outline-secondary bl" type="button" href="{% url 'registration' %}"> Регистрация </a>
-
     </form>
 </div>
 

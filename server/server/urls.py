@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from reapp.views import main_page, faq_page, info_page, registration_page, login_page
+from reapp.views import main_page, faq_page, info_page, registration_page, login_page, logout_page, notepad
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,6 +27,8 @@ urlpatterns = [
     path('faq/', faq_page, name="faq"),
     path('info/', info_page, name="info"),
     path('registration/', registration_page, name="registration"),
-    path('login/', login_page, name="login")
+    path('login/', login_page, name="login"),
+    path('logout/', logout_page, name="logout"),
+    path('notepad/', notepad, name="notepad")
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

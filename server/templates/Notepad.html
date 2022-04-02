@@ -1,0 +1,80 @@
+{% extends 'Index.html' %}
+{% load static %}
+{% block content %}
+<form id="frm" class="end" title="Для доступа к заметкам войдите или зарегистрируйтесь!">
+    <div class="input-group">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Размер
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><input id="f_size" class="form-control dropdown-item" type="number" value="16" min="12" max="98"
+                           href="#"/></li>
+                <li><a onclick="ChangeFontSize()" class="btn dropdown-item">Ок</a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Шрифт
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a id="f1" class="btn dropdown-item"> Vollkorn </a></li>
+                <li><a id="f2" class="btn dropdown-item"> Red Hat Mono </a></li>
+                <li><a id="f3" class="btn dropdown-item"> Roboto Slab </a></li>
+                <li><a id="f4" class="btn dropdown-item"> Open Sans </a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Толщина
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><input id="f_weight" class="form-control dropdown-item" type="number" value="400" min="400"
+                           max="600" href="#"/></li>
+                <li><a onclick="ChangeFontWeight" class="btn dropdown-item">Ок</a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Тип
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="btn dropdown-item"> Regular </a></li>
+                <li><a class="btn dropdown-item"> Italic </a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Тема
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="btn dropdown-item"> Light </a></li>
+                <li><a class="btn dropdown-item"> Dark </a></li>
+                <li><a class="btn dropdown-item"> Monokai </a></li>
+                <li><a class="btn dropdown-item"> Chocolate </a></li>
+            </ul>
+        </div>
+        <input id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..."/>
+        <button onclick="note()" type="button" class="f btn btn-success">Сохранить</button>
+        <button class="f btn btn-warning" type="reset">Очистить</button>
+    </div>
+    <textarea id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..."
+              aria-label="Text-area"></textarea>
+</form>
+<div class="container-fluid cent end">
+    <h2 class="btn btn-primary sb border border-1 border-secondary login rounded" data-bs-toggle="collapse"
+        href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" align="center">
+        Список записей
+    </h2>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <ul id="list"></ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
