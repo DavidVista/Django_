@@ -1,7 +1,7 @@
 {% extends 'Index.html' %}
 {% load static %}
 {% block content %}
-<form method="POST" id="frm" class="end" title="Для доступа к заметкам войдите или зарегистрируйтесь!">
+<form method="POST" id="frm" class="end">
     {% csrf_token %}
     <div class="input-group">
         <div class="dropdown">
@@ -47,10 +47,10 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="Light" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" checked/> <label for="Light"> Light </label> </div>
-                    <div class="form-check"><input value="Dark" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" /> <label for="Dark"> Dark </label> </div>
-                    <div class="form-check"><input value="Monokai" type="radio" id=Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" /> <label for="Monokai"> Monokai </label> </div>
-                    <div class="form-check"><input value="Chocolate" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" /> <label for="Chocolate"> Chocolate </label> </div>
+                    <div class="form-check"><input value="white black" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" checked/> <label for="Light"> Light </label> </div>
+                    <div class="form-check"><input value="black white" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" /> <label for="Dark"> Dark </label> </div>
+                    <div class="form-check"><input value="black red" type="radio" id=Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" /> <label for="Monokai"> Monokai </label> </div>
+                    <div class="form-check"><input value="brown yellow" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" /> <label for="Chocolate"> Chocolate </label> </div>
                 </li>
             </ul>
         </div>
@@ -68,10 +68,10 @@
     </h2>
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
-            <ul id="list">
+            <ul id="list" class="wrapper-c">
                 {% for text in texts %}
                 {% if text.user.username == username %}
-                <form method="POST" class="addit"> {% csrf_token %} <button type="submit" class="clr"> {{ text.name }} - [changed in {{ text.date_of_recent_change }}] [Created in {{text.date_of_creation}}] </button> </form>
+                <form method="POST" class="addit"> {% csrf_token %} <button value="{{text.name}}" name="txt" type="submit" class="btn btn-primary clr bl"> {{ text.name }} </button> </form>
                 {% endif %}
                 {% endfor %}
             </ul>
@@ -152,7 +152,7 @@ function ChangeToLight() {
     document.getElementById("NoteText").style.color = "black";
     document.getElementById("NoteHead").style.color = "black";
 
-    document.getElementById("Light").value = "Light";
+    document.getElementById("Light").value = "white black";
     document.getElementById("Dark").value = "";
     document.getElementById("Monokai").value = "";
     document.getElementById("Chocolate").value = "";
@@ -165,7 +165,7 @@ function ChangeToDark() {
     document.getElementById("NoteHead").style.color = "white";
 
     document.getElementById("Light").value = "";
-    document.getElementById("Dark").value = "Dark";
+    document.getElementById("Dark").value = "black white";
     document.getElementById("Monokai").value = "";
     document.getElementById("Chocolate").value = "";
 }
@@ -178,7 +178,7 @@ function ChangeToMonokai() {
 
     document.getElementById("Light").value = "";
     document.getElementById("Dark").value = "";
-    document.getElementById("Monokai").value = "Monokai";
+    document.getElementById("Monokai").value = "black red";
     document.getElementById("Chocolate").value = "";
 
 }
@@ -192,7 +192,7 @@ function ChangeToChocolate() {
     document.getElementById("Light").value = "";
     document.getElementById("Dark").value = "";
     document.getElementById("Monokai").value = "";
-    document.getElementById("Chocolate").value = "Chocolate";
+    document.getElementById("Chocolate").value = "brown yellow";
 }
 
 </script>

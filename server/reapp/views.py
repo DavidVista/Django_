@@ -75,64 +75,54 @@ def logout_page(request):
 def notepad(request):
     if request.user.is_authenticated:
         form = TextForm()
-        if request.method == "POST":
-            print(request.POST)
-            print(request.POST.get("font-type"))
+        texts = Text.objects.all()
+        if request.method == "POST" and request.POST.get("font-size") is not None:
             if request.POST.get("font-type", "reg") == "reg":
                 a = "reg"
-                is_bold = False
-                is_italic = False
             elif request.POST.get("font-type", "reg") == "bold":
                 a = "bold"
-                is_bold = True
-                is_italic = False
             elif request.POST.get("font-type", "reg") == "italic":
                 a = "italic"
-                is_bold = False
-                is_italic = True
             else:
                 a = "bold italic"
-                is_bold = True
-                is_italic = True
-            if request.POST.get("theme") == "Light":
-                b = "white black"
-            elif request.POST.get("theme") == "Dark":
-                b = "black white"
-            elif request.POST.get("theme") == "Monokai":
-                b = "black red"
-            else:
-                b = "brown yellow"
             form = TextForm(
                 data={"name": request.POST.get("name"),
                       "text": request.POST.get("text"),
                       "font_size": request.POST.get("font-size"),
                       "font_family": request.POST.get("font-family"),
                       "font_type": a,
-                      "theme_type": b}
+                      "theme_type": request.POST.get("theme")}
             )
             if form.is_valid():
                 text = form.save(commit=False)
                 text.user = request.user
                 text.save()
-                print("I'm here!")
-                return render(request, 'Note.html',
+                return render(request, 'Index.html',
                               {
-                                  'font_size': request.POST.get("font-size"),
-                                  'is_bold': is_bold, 'is_italic': is_italic,
-                                  'font-family': request.POST.get("font-family")[0],
-                                  'theme': request.POST.get("theme"),
-                                  'header': request.POST.get("header"),
-                                  'text': request.POST.get("text"),
-                                  # 'texts': texts,
-                                  'user': request.user,
-                                  'username': request.user.username,
-                                  'authenticated': True
+                                  "username": request.user.username,
+                                  "authenticated": request.user.is_authenticated
                               }
                               )
             else:
-                print(form.errors.as_data())
+                return render(request, 'Notepad.html',
+                              {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts})
+        elif request.method == "POST":
+            text = Text.objects.get(name=request.POST.get("txt"))
+            if text.font_type == "bold":
+                is_bold = True
+                is_italic = False
+            elif text.font_type == "italic":
+                is_bold = False
+                is_italic = True
+            elif text.font_type == "bold italic":
+                is_bold = True
+                is_italic = True
+            else:
+                is_bold, is_italic = False, False
+            print(text, is_bold, is_italic, str(text.font_size), text.text)
+            return render(request, 'Note.html', {"font_size": str(text.font_size), "text_of": text.text, "is_bold": is_bold, "is_italic": is_italic, 'username': request.user.username, 'authenticated': True, "texts": texts})
         return render(request, 'Notepad.html',
-                      {'user': request.user, 'username': request.user.username, 'authenticated': True})
+                      {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts})
 
 
 def note(request):
