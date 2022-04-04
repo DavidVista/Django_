@@ -1,6 +1,11 @@
 {% extends 'Index.html' %}
 {% load static %}
 {% block content %}
+{% for message in messages %}
+        <div class="alert alert-warning" role="alert">
+            {{ message }}
+        </div>
+{% endfor %}
 <form method="POST" id="frm" class="end">
     {% csrf_token %}
     <div class="input-group">
@@ -10,7 +15,11 @@
                 Размер
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><input id="f_size" class="form-control dropdown-item" type="number" value="{{ font_size }}" min="12" max="98" name="font-size"/></li>
+                {% if req_text %}
+                <li><input id="f_size" class="form-control dropdown-item" type="number" value="{{ font_size }}" min="12" max="98" name="font_size"/></li>
+                {% else %}
+                <li><input id="f_size" class="form-control dropdown-item" type="number" value="16" min="12" max="98" name="font_size"/></li>
+                {% endif %}
                 <li><a onclick="ChangeFontSize()" class="btn dropdown-item">Ок</a></li>
             </ul>
         </div>
@@ -19,36 +28,36 @@
                     data-bs-toggle="dropdown" aria-expanded="false">
                 Тип
             </button>
-            {% if is_bold and is_italic %}
+            {% if is_bold and is_italic and req_text %}
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
-                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" checked /> <label class="form-check-label" for="bold">Bold</label></div>
-                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" checked /> <label class="form-check-label" for="italic"> Italic </label></div>
+                    <div style="display:none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font_type" checked /> </div>
+                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font_type" checked /> <label class="form-check-label" for="bold">Bold</label></div>
+                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font_type" checked /> <label class="form-check-label" for="italic"> Italic </label></div>
                 </li>
             </ul>
-            {% elif is_bold and not is_italic %}
+            {% elif is_bold and not is_italic and req_text %}
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
-                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" checked /> <label class="form-check-label" for="bold">Bold</label></div>
-                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="italic"> Italic </label></div>
+                    <div style="display:none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font_type" checked /> </div>
+                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font_type" checked /> <label class="form-check-label" for="bold">Bold</label></div>
+                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font_type" /> <label class="form-check-label" for="italic"> Italic </label></div>
                 </li>
             </ul>
-            {% elif not is_bold and is_italic %}
+            {% elif not is_bold and is_italic and req_text %}
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
-                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="bold">Bold</label></div>
-                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" checked /> <label class="form-check-label" for="italic"> Italic </label></div>
+                    <div style="display:none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font_type" checked /> </div>
+                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font_type" /> <label class="form-check-label" for="bold">Bold</label></div>
+                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font_type" checked /> <label class="form-check-label" for="italic"> Italic </label></div>
                 </li>
             </ul>
             {% else %}
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check" style="display: none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font-type" checked /></div>
-                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="bold">Bold</label></div>
-                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font-type" /> <label class="form-check-label" for="italic"> Italic </label></div>
+                    <div style="display:none;"> <input value="reg" type="hidden" id="regular" class="form-check-input" name="font_type" checked /> </div>
+                    <div class="form-check"> <input value="bold" type="checkbox" id="bold" onclick="ChangeToBold()" class="form-check-input" name="font_type" /> <label class="form-check-label" for="bold">Bold</label></div>
+                    <div class="form-check"> <input value="italic" type="checkbox" id="italic" onclick="ChangeToItalic()" class="form-check-input" name="font_type" /> <label class="form-check-label" for="italic"> Italic </label></div>
                 </li>
             </ul>
             {% endif %}
@@ -60,10 +69,10 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="Vollkorn" type="radio" id="Vollkorn" onclick="ChangeToVollkorn()" class="form-check-input" name="font-family" {% if text.font_family == 'Vollkorn' %} checked {% endif %} /> <label for="Vollkorn">Vollkorn </label> </div>
-                    <div class="form-check"><input value="Red Hat Mono" type="radio" id="RedHatMono" onclick="ChangeToRedHatMono()" class="form-check-input" name="font-family" {% if text.font_family == 'Red Hat Mono' %} checked {% endif %} /> <label for="RedHatMono"> Red Hat Mono </label> </div>
-                    <div class="form-check"><input value="Roboto Slab" type="radio" id="RobotoSlab" onclick="ChangeToRobotoSlab()" class="form-check-input" name="font-family" {% if text.font_family == 'Roboto Slab' %} checked {% endif %} /> <label for="RobotoSlab"> Roboto Slab </label> </div>
-                    <div class="form-check"><input value="Open Sans" type="radio" id="OpenSans" onclick="ChangeToOpenSans()" class="form-check-input" name="font-family" /> {% if text.font_family == 'Open Sans' %} checked {% endif %} <label for="OpenSans"> Open Sans </label> </div>
+                    <div class="form-check"><input value="Vollkorn" type="radio" id="Vollkorn" onclick="ChangeToVollkorn()" class="form-check-input" name="font_family" {% if text.font_family == 'Vollkorn' and req_text %} checked {% elif not req_text %} checked {% endif %} /> <label for="Vollkorn">Vollkorn </label> </div>
+                    <div class="form-check"><input value="Red Hat Mono" type="radio" id="RedHatMono" onclick="ChangeToRedHatMono()" class="form-check-input" name="font_family" {% if text.font_family == 'Red Hat Mono' and req_text %} checked {% endif %} /> <label for="RedHatMono"> Red Hat Mono </label> </div>
+                    <div class="form-check"><input value="Roboto Slab" type="radio" id="RobotoSlab" onclick="ChangeToRobotoSlab()" class="form-check-input" name="font_family" {% if text.font_family == 'Roboto Slab' and req_text %} checked {% endif %} /> <label for="RobotoSlab"> Roboto Slab </label> </div>
+                    <div class="form-check"><input value="Open Sans" type="radio" id="OpenSans" onclick="ChangeToOpenSans()" class="form-check-input" name="font_family" /> {% if text.font_family == 'Open Sans' and req_text %} checked {% endif %} <label for="OpenSans"> Open Sans </label> </div>
                 </li>
             </ul>
         </div>
@@ -74,19 +83,28 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="white black" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" {% if text.theme_type == 'Light' %} checked {% endif %}/> <label for="Light"> Light </label> </div>
-                    <div class="form-check"><input value="black white" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" {% if text.theme_type == 'Dark' %} checked {% endif %} /> <label for="Dark"> Dark </label> </div>
-                    <div class="form-check"><input value="black red" type="radio" id=Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" {% if text.theme_type == 'Monokai' %} checked {% endif %} /> <label for="Monokai"> Monokai </label> </div>
-                    <div class="form-check"><input value="brown yellow" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" {% if text.theme_type == 'Chocolate' %} checked {% endif %} /> <label for="Chocolate"> Chocolate </label> </div>
+                    <div class="form-check"><input value="white black" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" {% if text.theme_type == 'white black' and req_text %} checked {% elif not req_text %} checked {% endif %}/> <label for="Light"> Light </label> </div>
+                    <div class="form-check"><input value="black white" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" {% if text.theme_type == 'black white' and req_text %} checked {% endif %} /> <label for="Dark"> Dark </label> </div>
+                    <div class="form-check"><input value="black red" type="radio" id="Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" {% if text.theme_type == 'black red' and req_text %} checked {% endif %} /> <label for="Monokai"> Monokai </label> </div>
+                    <div class="form-check"><input value="brown yellow" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" {% if text.theme_type == 'brown yellow' and req_text %} checked {% endif %} /> <label for="Chocolate"> Chocolate </label> </div>
                 </li>
             </ul>
         </div>
-        <input name="header" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ text.name }}"/>
+        {% if req_text %}
+        <input name="name" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ text.name }}"/>
+        {% else %}
+        <input name="name" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ text.name }}"/>
+        {% endif%}
         <button type="submit" class="f btn btn-success">Сохранить</button>
-        <button class="f btn btn-warning" type="reset">Очистить</button>
+        <button onclick="ChangeToDefault()" t class="f btn btn-warning" type="button">Очистить</button>
     </div>
+    {% if req_text %}
     <textarea name="text" id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..."
               aria-label="Text-area">{{ text_of }}</textarea>
+    {% else %}
+    <textarea name="text" id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..."
+              aria-label="Text-area"></textarea>
+    {% endif %}
 </form>
 <div class="container-fluid cent end">
     <h2 class="btn btn-primary sb border border-1 border-secondary login rounded" data-bs-toggle="collapse"
@@ -98,7 +116,7 @@
             <ul id="list">
                 {% for t in texts %}
                 {% if t.user.username == username %}
-                <form method="POST" action="{% url 'note' %}" class="addit"> {% csrf_token %} <button type="submit" class="clr"> {{ t.name }}</button> </form>
+                <form method="POST" action="{% url 'note' %}" class="addit"> {% csrf_token %} <button value="{{ t.name }}" type="submit" class="btn btn-primary bl clr" name="txt"> {{ t.name }} </button> </form>
                 {% endif %}
                 {% endfor %}
             </ul>
@@ -107,21 +125,34 @@
 </div>
 
 <script>
+var bd = 0;
+var it = 0;
 window.onload = function() {
+    var size = document.getElementById("f_size").value;
+    document.getElementById("NoteText").style.fontSize = size + "px";
+
     if (document.getElementById("bold").checked) {
-        document.getElementById("NoteText").style.fontWeight = "bold";
+        document.getElementById("NoteText").style.fontWeight = "bold"
+        bd = 1;
+    }
+    else {
+        bd = 0;
     }
     if (document.getElementById("italic").checked) {
         document.getElementById("NoteText").style.fontStyle = "italic";
+        it = 1;
+    }
+    else {
+        it = 0;
     }
 
     if (document.getElementById("Vollkorn").checked) {
     document.getElementById("NoteText").style.fontFamily = 'Vollkorn'}
-    if (document.getElementById("Red Hat Mono").checked) {
+    if (document.getElementById("RedHatMono").checked) {
     document.getElementById("NoteText").style.fontFamily = 'Red Hat Mono'}
-    if (document.getElementById("Roboto Slab").checked) {
+    if (document.getElementById("RobotoSlab").checked) {
     document.getElementById("NoteText").style.fontFamily = 'Roboto Slab'}
-    if (document.getElementById("Open Sans").checked) {
+    if (document.getElementById("OpenSans").checked) {
     document.getElementById("NoteText").style.fontFamily = 'Open Sans'}
 
     if (document.getElementById("Light").checked) {
@@ -149,9 +180,6 @@ window.onload = function() {
         document.getElementById("NoteHead").style.color = "yellow";
     }
 }
-
-var bd = 0;
-var it = 0;
 
 function ChangeFontSize() {
 	var size = document.getElementById("f_size").value;
@@ -222,7 +250,7 @@ function ChangeToLight() {
     document.getElementById("NoteText").style.color = "black";
     document.getElementById("NoteHead").style.color = "black";
 
-    document.getElementById("Light").value = "Light";
+    document.getElementById("Light").value = "white black";
     document.getElementById("Dark").value = "";
     document.getElementById("Monokai").value = "";
     document.getElementById("Chocolate").value = "";
@@ -235,7 +263,7 @@ function ChangeToDark() {
     document.getElementById("NoteHead").style.color = "white";
 
     document.getElementById("Light").value = "";
-    document.getElementById("Dark").value = "Dark";
+    document.getElementById("Dark").value = "black white";
     document.getElementById("Monokai").value = "";
     document.getElementById("Chocolate").value = "";
 }
@@ -248,7 +276,7 @@ function ChangeToMonokai() {
 
     document.getElementById("Light").value = "";
     document.getElementById("Dark").value = "";
-    document.getElementById("Monokai").value = "Monokai";
+    document.getElementById("Monokai").value = "black red";
     document.getElementById("Chocolate").value = "";
 
 }
@@ -262,8 +290,54 @@ function ChangeToChocolate() {
     document.getElementById("Light").value = "";
     document.getElementById("Dark").value = "";
     document.getElementById("Monokai").value = "";
-    document.getElementById("Chocolate").value = "Chocolate";
+    document.getElementById("Chocolate").value = "brown yellow";
 }
+
+function ChangeToDefault() {
+    document.getElementById("f_size").value = "16";
+    document.getElementById("NoteText").style.fontSize = "16px";
+
+    document.getElementById("bold").value = "";
+    document.getElementById("bold").checked = false;
+    document.getElementById("italic").value = "";
+    document.getElementById("italic").checked = false;
+
+    document.getElementById("Vollkorn").value = "Vollkorn";
+    document.getElementById("Vollkorn").checked = true;
+    document.getElementById("RedHatMono").value = "";
+     document.getElementById("RedHatMono").checked = false;
+    document.getElementById("RobotoSlab").value = "";
+     document.getElementById("RobotoSlab").checked = false;
+    document.getElementById("OpenSans").value = "";
+     document.getElementById("OpenSans").checked = false;
+
+    document.getElementById("Light").value = "white black";
+     document.getElementById("Light").checked = true;
+    document.getElementById("Dark").value = "";
+     document.getElementById("Dark").checked = false;
+    document.getElementById("Monokai").value = "";
+     document.getElementById("Monokai").checked = false;
+    document.getElementById("Chocolate").value = "";
+     document.getElementById("Chocolate").checked = false;
+
+
+    document.getElementById("NoteText").style.fontFamily = 'Vollkorn';
+
+    document.getElementById("NoteText").style.backgroundColor = "white";
+    document.getElementById("NoteHead").style.backgroundColor = "white";
+    document.getElementById("NoteText").style.color = "black";
+    document.getElementById("NoteHead").style.color = "black";
+
+    document.getElementById("NoteText").style.fontStyle = "";
+	it = 0;
+	bd = 0;
+	document.getElementById("NoteText").style.fontWeight = "normal";
+
+
+	document.getElementById("NoteText").value = "";
+	document.getElementById("NoteHead").value = "";
+}
+
 
 </script>
 
