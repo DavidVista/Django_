@@ -44,6 +44,7 @@ a {
 }
 
 .wrapper {
+    transition: 1s;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;

@@ -78,7 +78,6 @@ def note(request):
         texts = Text.objects.all()
         if request.method == "POST" and request.POST.get("font_size") is not None:
             req_text = False
-            print(request.POST.getlist("font_type"))
             if request.POST.getlist("font_type") == ["reg"]:
                 a = "reg"
             elif request.POST.getlist("font_type") == ["reg", "bold"]:
@@ -87,8 +86,6 @@ def note(request):
                 a = "italic"
             else:
                 a = "bold italic"
-            print(request.POST)
-            print(request.POST.get("name"), request.POST.get("text"), request.POST.get("font_size"), request.POST.get("font_family"), a, request.POST.get("theme"))
             form = TextForm(
                 data={"name": request.POST.get("name"),
                       "text": request.POST.get("text"),
@@ -111,7 +108,7 @@ def note(request):
                 messages.error(request, "Что-то пошло не так, просим извинений!")
                 return render(request, 'Note.html',
                               {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
-        elif request.method == "POST":
+        elif request.method == "POST" and request.POST.get("txt") is not None:
             req_text = True
             text = Text.objects.get(name=request.POST.get("txt"))
             if text.font_type == "bold":
@@ -126,6 +123,13 @@ def note(request):
             else:
                 is_bold, is_italic = False, False
             return render(request, 'Note.html', {"text": text, "font_size": text.font_size, "text_of": text.text, "is_bold": is_bold, "is_italic": is_italic, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
+        elif request.method == "POST" and request.POST.get("is_deleted") is not None:
+            req_text = False
+            print(request.POST.get("is_deleted"))
+            text = Text.objects.get(name=request.POST.get("is_deleted"))
+            text.delete()
+            messages.success(request, "Записка успешно удалена!")
+            return render(request, 'Note.html', {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
         req_text = False
         return render(request, 'Note.html',
                       {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})

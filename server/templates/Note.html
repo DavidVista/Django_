@@ -96,7 +96,7 @@
         <input name="name" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ text.name }}"/>
         {% endif%}
         <button type="submit" class="f btn btn-success">Сохранить</button>
-        <button onclick="ChangeToDefault()" t class="f btn btn-warning" type="button">Очистить</button>
+        <button onclick="ChangeToDefault()" class="f btn btn-warning" type="button">Очистить</button>
     </div>
     {% if req_text %}
     <textarea name="text" id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..."
@@ -116,7 +116,7 @@
             <ul id="list">
                 {% for t in texts %}
                 {% if t.user.username == username %}
-                <form method="POST" action="{% url 'note' %}" class="addit"> {% csrf_token %} <button value="{{ t.name }}" type="submit" class="btn btn-primary bl clr" name="txt"> {{ t.name }} </button> </form>
+                <form method="POST"> {% csrf_token %} <button value="{{ t.name }}" type="submit" class="btn btn-primary bl clr addit" name="txt"> {{ t.name }} </button> <button id="delete" value="{{t.name}}" type="submit" class="btn btn-danger bl clr addit" name="is_deleted">Удалить</button></form>
                 {% endif %}
                 {% endfor %}
             </ul>
