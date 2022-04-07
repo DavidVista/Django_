@@ -78,6 +78,9 @@ def note(request):
         texts = Text.objects.all()
         if request.method == "POST" and request.POST.get("font_size") is not None:
             req_text = False
+            if Text.objects.get(name=request.POST.get("name")):
+                messages.error(request, "Такая запись уже существует!")
+                return render(request, "Note.html", {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
             if request.POST.getlist("font_type") == ["reg"]:
                 a = "reg"
             elif request.POST.getlist("font_type") == ["reg", "bold"]:

@@ -83,10 +83,10 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="white black" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" {% if text.theme_type == 'white black' and req_text %} checked {% elif not req_text %} checked {% endif %}/> <label for="Light"> Light </label> </div>
-                    <div class="form-check"><input value="black white" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" {% if text.theme_type == 'black white' and req_text %} checked {% endif %} /> <label for="Dark"> Dark </label> </div>
-                    <div class="form-check"><input value="black red" type="radio" id="Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" {% if text.theme_type == 'black red' and req_text %} checked {% endif %} /> <label for="Monokai"> Monokai </label> </div>
-                    <div class="form-check"><input value="brown yellow" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" {% if text.theme_type == 'brown yellow' and req_text %} checked {% endif %} /> <label for="Chocolate"> Chocolate </label> </div>
+                    <div class="form-check"><input value="Light" type="radio" id="Light" onclick="ChangeToLight()" class="form-check-input" name="theme" {% if text.theme_type == 'Light' and req_text %} checked {% elif not req_text %} checked {% endif %}/> <label for="Light"> Light </label> </div>
+                    <div class="form-check"><input value="Dark" type="radio" id="Dark" onclick="ChangeToDark()" class="form-check-input" name="theme" {% if text.theme_type == 'Dark' and req_text %} checked {% endif %} /> <label for="Dark"> Dark </label> </div>
+                    <div class="form-check"><input value="Monokai" type="radio" id="Monokai" onclick="ChangeToMonokai()" class="form-check-input" name="theme" {% if text.theme_type == 'Monokai' and req_text %} checked {% endif %} /> <label for="Monokai"> Monokai </label> </div>
+                    <div class="form-check"><input value="Chocolate" type="radio" id="Chocolate" onclick="ChangeToChocolate()" class="form-check-input" name="theme" {% if text.theme_type == 'Chocolate' and req_text %} checked {% endif %} /> <label for="Chocolate"> Chocolate </label> </div>
                 </li>
             </ul>
         </div>
@@ -146,38 +146,39 @@ window.onload = function() {
         it = 0;
     }
 
-    if (document.getElementById("Vollkorn").checked) {
-    document.getElementById("NoteText").style.fontFamily = 'Vollkorn'}
-    if (document.getElementById("RedHatMono").checked) {
-    document.getElementById("NoteText").style.fontFamily = 'Red Hat Mono'}
-    if (document.getElementById("RobotoSlab").checked) {
-    document.getElementById("NoteText").style.fontFamily = 'Roboto Slab'}
-    if (document.getElementById("OpenSans").checked) {
-    document.getElementById("NoteText").style.fontFamily = 'Open Sans'}
+    for (var i = 0; i < document.getElementsByName("font_family").length; i++) {
+        if (document.getElementsByName("font_family")[i].checked) {
+            document.getElementById("NoteText").style.fontFamily = document.getElementsByName("font_family")[i].value;
+        }
+    }
 
-    if (document.getElementById("Light").checked) {
-        document.getElementById("NoteText").style.backgroundColor = "white";
-        document.getElementById("NoteHead").style.backgroundColor = "white";
-        document.getElementById("NoteText").style.color = "black";
-        document.getElementById("NoteHead").style.color = "black";
-    }
-    if (document.getElementById("Dark").checked) {
-        document.getElementById("NoteText").style.backgroundColor = "black";
-        document.getElementById("NoteHead").style.backgroundColor = "black";
-        document.getElementById("NoteText").style.color = "white";
-        document.getElementById("NoteHead").style.color = "white";
-    }
-    if (document.getElementById("Monokai").checked) {
-        document.getElementById("NoteText").style.backgroundColor = "black";
-        document.getElementById("NoteHead").style.backgroundColor = "black";
-        document.getElementById("NoteText").style.color = "red";
-        document.getElementById("NoteHead").style.color = "red";
-    }
-    if (document.getElementById("Chocolate").checked) {
-        document.getElementById("NoteText").style.backgroundColor = "brown";
-        document.getElementById("NoteHead").style.backgroundColor = "brown";
-        document.getElementById("NoteText").style.color = "yellow";
-        document.getElementById("NoteHead").style.color = "yellow";
+    for (var i = 0; i < document.getElementsByName("theme").length; i++) {
+        if (document.getElementsByName("theme")[i].checked) {
+            if (document.getElementsByName("theme")[i].value == "Light") {
+                document.getElementById("NoteText").style.backgroundColor = "white";
+                document.getElementById("NoteHead").style.backgroundColor = "white";
+                document.getElementById("NoteText").style.color = "black";
+                document.getElementById("NoteHead").style.color = "black";
+            }
+            if (document.getElementsByName("theme")[i].value == "Dark") {
+                document.getElementById("NoteText").style.backgroundColor = "black";
+                document.getElementById("NoteHead").style.backgroundColor = "black";
+                document.getElementById("NoteText").style.color = "white";
+                document.getElementById("NoteHead").style.color = "white";
+            }
+            if (document.getElementsByName("theme")[i].value == "Monokai") {
+                document.getElementById("NoteText").style.backgroundColor = "black";
+                document.getElementById("NoteHead").style.backgroundColor = "black";
+                document.getElementById("NoteText").style.color = "red";
+                document.getElementById("NoteHead").style.color = "red";
+            }
+            if (document.getElementsByName("theme")[i].value == "Chocolate") {
+                document.getElementById("NoteText").style.backgroundColor = "brown";
+                document.getElementById("NoteHead").style.backgroundColor = "brown";
+                document.getElementById("NoteText").style.color = "yellow";
+                document.getElementById("NoteHead").style.color = "yellow";
+            }
+        }
     }
 }
 
@@ -190,12 +191,10 @@ function ChangeToBold() {
     if (bd===0) {
 	document.getElementById("NoteText").style.fontWeight = "bold";
 	bd = 1;
-	document.getElementById("bold").value = "bold";
 	}
 	else {
 	    document.getElementById("NoteText").style.fontWeight = "normal";
 	    bd = 0;
-	    document.getElementById("bold").value = "";
 	}
 }
 
@@ -203,45 +202,27 @@ function ChangeToItalic() {
 	if (it===0) {
 	document.getElementById("NoteText").style.fontStyle = "italic";
 	it = 1;
-	document.getElementById("italic").value = "italic";
 	}
 	else {
 	    document.getElementById("NoteText").style.fontStyle = "";
 	    it = 0;
-	    document.getElementById("italic").value = "";
 	}
 }
 
 function ChangeToVollkorn() {
     document.getElementById("NoteText").style.fontFamily = 'Vollkorn';
-    document.getElementById("Vollkorn").value = "Vollkorn";
-    document.getElementById("RedHatMono").value = "";
-    document.getElementById("RobotoSlab").value = "";
-    document.getElementById("OpenSans").value = "";
 }
 
 function ChangeToRedHatMono() {
     document.getElementById("NoteText").style.fontFamily = 'Red Hat Mono';
-    document.getElementById("Vollkorn").value = "";
-    document.getElementById("RedHatMono").value = "Red Hat Mono";
-    document.getElementById("RobotoSlab").value = "";
-    document.getElementById("OpenSans").value = "";
 }
 
 function ChangeToRobotoSlab() {
     document.getElementById("NoteText").style.fontFamily = 'Roboto Slab';
-    document.getElementById("Vollkorn").value = "";
-    document.getElementById("RedHatMono").value = "";
-    document.getElementById("RobotoSlab").value = "Roboto Slab";
-    document.getElementById("OpenSans").value = "";
 }
 
 function ChangeToOpenSans() {
     document.getElementById("NoteText").style.fontFamily = 'Open Sans';
-    document.getElementById("Vollkorn").value = "";
-    document.getElementById("RedHatMono").value = "";
-    document.getElementById("RobotoSlab").value = "";
-    document.getElementById("OpenSans").value = "Open Sans";
 }
 
 function ChangeToLight() {
@@ -249,11 +230,6 @@ function ChangeToLight() {
     document.getElementById("NoteHead").style.backgroundColor = "white";
     document.getElementById("NoteText").style.color = "black";
     document.getElementById("NoteHead").style.color = "black";
-
-    document.getElementById("Light").value = "white black";
-    document.getElementById("Dark").value = "";
-    document.getElementById("Monokai").value = "";
-    document.getElementById("Chocolate").value = "";
 }
 
 function ChangeToDark() {
@@ -261,11 +237,6 @@ function ChangeToDark() {
     document.getElementById("NoteHead").style.backgroundColor = "black";
     document.getElementById("NoteText").style.color = "white";
     document.getElementById("NoteHead").style.color = "white";
-
-    document.getElementById("Light").value = "";
-    document.getElementById("Dark").value = "black white";
-    document.getElementById("Monokai").value = "";
-    document.getElementById("Chocolate").value = "";
 }
 
 function ChangeToMonokai() {
@@ -273,12 +244,6 @@ function ChangeToMonokai() {
     document.getElementById("NoteHead").style.backgroundColor = "black";
     document.getElementById("NoteText").style.color = "red";
     document.getElementById("NoteHead").style.color = "red";
-
-    document.getElementById("Light").value = "";
-    document.getElementById("Dark").value = "";
-    document.getElementById("Monokai").value = "black red";
-    document.getElementById("Chocolate").value = "";
-
 }
 
 function ChangeToChocolate() {
@@ -286,47 +251,37 @@ function ChangeToChocolate() {
     document.getElementById("NoteHead").style.backgroundColor = "brown";
     document.getElementById("NoteText").style.color = "yellow";
     document.getElementById("NoteHead").style.color = "yellow";
-
-    document.getElementById("Light").value = "";
-    document.getElementById("Dark").value = "";
-    document.getElementById("Monokai").value = "";
-    document.getElementById("Chocolate").value = "brown yellow";
 }
 
 function ChangeToDefault() {
     document.getElementById("f_size").value = "16";
     document.getElementById("NoteText").style.fontSize = "16px";
 
-    document.getElementById("bold").value = "";
-    document.getElementById("bold").checked = false;
-    document.getElementById("italic").value = "";
-    document.getElementById("italic").checked = false;
+    for (var i = 0; document.getElementsByName("font_type").length; i++) {
+        document.getElementsByName("font_type")[i].checked = false;
+    }
 
-    document.getElementById("Vollkorn").value = "Vollkorn";
-    document.getElementById("Vollkorn").checked = true;
-    document.getElementById("RedHatMono").value = "";
-     document.getElementById("RedHatMono").checked = false;
-    document.getElementById("RobotoSlab").value = "";
-     document.getElementById("RobotoSlab").checked = false;
-    document.getElementById("OpenSans").value = "";
-     document.getElementById("OpenSans").checked = false;
-
-    document.getElementById("Light").value = "white black";
-     document.getElementById("Light").checked = true;
-    document.getElementById("Dark").value = "";
-     document.getElementById("Dark").checked = false;
-    document.getElementById("Monokai").value = "";
-     document.getElementById("Monokai").checked = false;
-    document.getElementById("Chocolate").value = "";
-     document.getElementById("Chocolate").checked = false;
-
-
-    document.getElementById("NoteText").style.fontFamily = 'Vollkorn';
-
-    document.getElementById("NoteText").style.backgroundColor = "white";
-    document.getElementById("NoteHead").style.backgroundColor = "white";
-    document.getElementById("NoteText").style.color = "black";
-    document.getElementById("NoteHead").style.color = "black";
+    for (var i = 0; document.getElementsByName("font_family").length; i++) {
+        if (document.getElementsByName("font_family")[i].value == "Vollkorn") {
+            document.getElementsByName("font_family")[i].checked = true;
+            document.getElementById("NoteText").style.fontFamily = 'Vollkorn';
+        }
+        else {
+        document.getElementsByName("font_family")[i].checked = false;
+        }
+    }
+    for (var i = 0; document.getElementsByName("theme").length; i++) {
+        if (document.getElementsByName("theme")[i].id == "Light") {
+            document.getElementsByName("theme")[i].checked = true;
+            document.getElementById("NoteText").style.backgroundColor = "white";
+            document.getElementById("NoteHead").style.backgroundColor = "white";
+            document.getElementById("NoteText").style.color = "black";
+            document.getElementById("NoteHead").style.color = "black";
+        }
+        else {
+            document.getElementsByName("theme")[i].checked = false;
+        }
+    }
 
     document.getElementById("NoteText").style.fontStyle = "";
 	it = 0;

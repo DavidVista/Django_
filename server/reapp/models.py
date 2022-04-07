@@ -5,10 +5,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Text(models.Model):
     THEME = (
-        ('white black', 'Light'),
-        ('black white', 'Dark'),
-        ('black red', 'Monokai'),
-        ('brown yellow', 'Chocolate')
+        ('Light', 'Light'),
+        ('Dark', 'Dark'),
+        ('Monokai', 'Monokai'),
+        ('Chocolate', 'Chocolate')
     )
     TYPES = (
         ("reg", "Regular"),
