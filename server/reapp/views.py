@@ -1,11 +1,8 @@
-import datetime
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from reapp.models import Text
 from reapp.form import RegistrationUser, TextForm
 import django.contrib.messages as messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -74,13 +71,13 @@ def logout_page(request):
 
 def note(request):
     if request.user.is_authenticated:
-        form = TextForm()
-        texts = Text.objects.all()
-        if request.method == "POST" and request.POST.get("font_size") is not None:
+        if request.method == "POST" and request.POST.get("font_size") is not None and request.POST.get("new_sheet") is None:
             req_text = False
-            if Text.objects.get(name=request.POST.get("name")):
-                messages.error(request, "Такая запись уже существует!")
-                return render(request, "Note.html", {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
+            status = request.POST.get("status")
+            if status == "Saved":
+                is_required = True
+            else:
+                is_required = False
             if request.POST.getlist("font_type") == ["reg"]:
                 a = "reg"
             elif request.POST.getlist("font_type") == ["reg", "bold"]:
@@ -89,14 +86,33 @@ def note(request):
                 a = "italic"
             else:
                 a = "bold italic"
-            form = TextForm(
-                data={"name": request.POST.get("name"),
-                      "text": request.POST.get("text"),
-                      "font_size": request.POST.get("font_size"),
-                      "font_family": request.POST.get("font_family"),
-                      "font_type": a,
-                      "theme_type": request.POST.get("theme")}
-            )
+            if Text.objects.filter(name=request.POST.get("name")).exists() and not is_required:
+                texts = Text.objects.all()
+                messages.error(request, "Такая запись уже существует!")
+                return render(request, "Note.html",
+                              {'user': request.user, 'username': request.user.username, 'authenticated': True,
+                               "texts": texts, "req_text": req_text})
+            elif is_required:
+                obj = Text.objects.get(name=request.POST.get("old_name"))
+                obj.delete()
+                form = TextForm(data={
+                    "name": request.POST.get("name"),
+                    "text": request.POST.get("text"),
+                    "font_size": request.POST.get("font_size"),
+                    "font_family": request.POST.get("font_family"),
+                    "font_type": a,
+                    "theme_type": request.POST.get("theme")
+                }
+                )
+            else:
+                form = TextForm(
+                    data={"name": request.POST.get("name"),
+                          "text": request.POST.get("text"),
+                          "font_size": request.POST.get("font_size"),
+                          "font_family": request.POST.get("font_family"),
+                          "font_type": a,
+                          "theme_type": request.POST.get("theme")}
+                )
             if form.is_valid():
                 text = form.save(commit=False)
                 text.user = request.user
@@ -108,9 +124,11 @@ def note(request):
                               }
                               )
             else:
+                texts = Text.objects.all()
                 messages.error(request, "Что-то пошло не так, просим извинений!")
                 return render(request, 'Note.html',
-                              {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
+                              {'user': request.user, 'username': request.user.username, 'authenticated': True,
+                               "texts": texts, "req_text": req_text})
         elif request.method == "POST" and request.POST.get("txt") is not None:
             req_text = True
             text = Text.objects.get(name=request.POST.get("txt"))
@@ -125,15 +143,23 @@ def note(request):
                 is_italic = True
             else:
                 is_bold, is_italic = False, False
-            return render(request, 'Note.html', {"text": text, "font_size": text.font_size, "text_of": text.text, "is_bold": is_bold, "is_italic": is_italic, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
+            texts = Text.objects.all()
+            return render(request, 'Note.html',
+                          {"text": text, "font_size": text.font_size, "text_of": text.text, "is_bold": is_bold,
+                           "is_italic": is_italic, 'username': request.user.username, 'authenticated': True,
+                           "texts": texts, "req_text": req_text})
         elif request.method == "POST" and request.POST.get("is_deleted") is not None:
             req_text = False
-            print(request.POST.get("is_deleted"))
             text = Text.objects.get(name=request.POST.get("is_deleted"))
             text.delete()
+            texts = Text.objects.all()
             messages.success(request, "Записка успешно удалена!")
-            return render(request, 'Note.html', {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
+            return render(request, 'Note.html',
+                          {'user': request.user, 'username': request.user.username, 'authenticated': True,
+                           "texts": texts, "req_text": req_text})
         req_text = False
+        texts = Text.objects.all()
+        print("I'm here!")
         return render(request, 'Note.html',
-                      {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts, "req_text": req_text})
-
+                      {'user': request.user, 'username': request.user.username, 'authenticated': True, "texts": texts,
+                       "req_text": req_text})

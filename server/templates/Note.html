@@ -6,9 +6,15 @@
             {{ message }}
         </div>
 {% endfor %}
+
+{% if req_text %}
+<h2 class="sb label-l"> {{ text.name }} </h2>
+{% endif %}
+
 <form method="POST" id="frm" class="end">
     {% csrf_token %}
     <div class="input-group">
+        <input type="hidden" id="old_name" value="{{ text.name }}" name="old_name" />
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,6 +102,12 @@
         <input name="name" id="NoteHead" type="text" class="f form-control" placeholder="Название заметки..." value="{{ text.name }}"/>
         {% endif%}
         <button type="submit" class="f btn btn-success">Сохранить</button>
+        {% if req_text %}
+        <input id="saved" name="status" type="hidden" class="btn btn-success" value="Saved"/>
+        {% else %}
+        <input id="unsaved" name="status" type="hidden" class="btn btn-warning" value="Unsaved"/>
+        {% endif %}
+        <button id="new" name="new_sheet" class="f btn btn-primary" type="submit" {% if not req_text %} disabled {% endif %}>Новая заметка</button>
         <button onclick="ChangeToDefault()" class="f btn btn-warning" type="button">Очистить</button>
     </div>
     {% if req_text %}
@@ -257,11 +269,11 @@ function ChangeToDefault() {
     document.getElementById("f_size").value = "16";
     document.getElementById("NoteText").style.fontSize = "16px";
 
-    for (var i = 0; document.getElementsByName("font_type").length; i++) {
+    for (var i = 0; i < document.getElementsByName("font_type").length; i++) {
         document.getElementsByName("font_type")[i].checked = false;
     }
 
-    for (var i = 0; document.getElementsByName("font_family").length; i++) {
+    for (var i = 0; i < document.getElementsByName("font_family").length; i++) {
         if (document.getElementsByName("font_family")[i].value == "Vollkorn") {
             document.getElementsByName("font_family")[i].checked = true;
             document.getElementById("NoteText").style.fontFamily = 'Vollkorn';
@@ -270,7 +282,7 @@ function ChangeToDefault() {
         document.getElementsByName("font_family")[i].checked = false;
         }
     }
-    for (var i = 0; document.getElementsByName("theme").length; i++) {
+    for (var i = 0; i < document.getElementsByName("theme").length; i++) {
         if (document.getElementsByName("theme")[i].id == "Light") {
             document.getElementsByName("theme")[i].checked = true;
             document.getElementById("NoteText").style.backgroundColor = "white";
