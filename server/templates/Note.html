@@ -75,10 +75,15 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <div class="form-check"><input value="Vollkorn" type="radio" id="Vollkorn" onclick="ChangeToVollkorn()" class="form-check-input" name="font_family" {% if text.font_family == 'Vollkorn' and req_text %} checked {% elif not req_text %} checked {% endif %} /> <label for="Vollkorn">Vollkorn </label> </div>
-                    <div class="form-check"><input value="Red Hat Mono" type="radio" id="RedHatMono" onclick="ChangeToRedHatMono()" class="form-check-input" name="font_family" {% if text.font_family == 'Red Hat Mono' and req_text %} checked {% endif %} /> <label for="RedHatMono"> Red Hat Mono </label> </div>
-                    <div class="form-check"><input value="Roboto Slab" type="radio" id="RobotoSlab" onclick="ChangeToRobotoSlab()" class="form-check-input" name="font_family" {% if text.font_family == 'Roboto Slab' and req_text %} checked {% endif %} /> <label for="RobotoSlab"> Roboto Slab </label> </div>
-                    <div class="form-check"><input value="Open Sans" type="radio" id="OpenSans" onclick="ChangeToOpenSans()" class="form-check-input" name="font_family" /> {% if text.font_family == 'Open Sans' and req_text %} checked {% endif %} <label for="OpenSans"> Open Sans </label> </div>
+                    {%for font, family in fonts %}
+                    <div class="form-check"><input value="{{font.family}}" type="radio" id="{{font.family}}" onclick="ChangeTo{{family}}()" class="form-check-input" name="font_family" {% if text.font_family.family == font.family and req_text %} checked {% elif not req_text and font.family == "Vollkorn" %} checked {% endif %} /> <label for="{{font.family}}"> {{font.family}} </label> </div>
+                    {% endfor %}
+                </li>
+                <li>
+                    <form method="POST">
+                    <div> <input name="link" type="text" class="form-control dropdown-item" placeholder="Google Fonts link ..."/> </div>
+                    <button type="submit" class="btn dropdown-item">Отправить</button>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -111,11 +116,9 @@
         <button onclick="ChangeToDefault()" class="f btn btn-warning" type="button">Очистить</button>
     </div>
     {% if req_text %}
-    <textarea name="text" id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..."
-              aria-label="Text-area">{{ text_of }}</textarea>
+    <textarea form="frm" name="text" id="NoteText" class="form-control" rows="20" placeholder="Ваши мысли...">{{ text_of }}</textarea>
     {% else %}
-    <textarea name="text" id="NoteText" type="text" class="f form-control" rows="20" placeholder="Ваши мысли..."
-              aria-label="Text-area"></textarea>
+    <textarea form="frm" name="text" id="NoteText" class="form-control" rows="20" placeholder="Ваши мысли..."></textarea>
     {% endif %}
 </form>
 <div class="container-fluid cent end">
@@ -169,26 +172,26 @@ window.onload = function() {
             if (document.getElementsByName("theme")[i].value == "Light") {
                 document.getElementById("NoteText").style.backgroundColor = "white";
                 document.getElementById("NoteHead").style.backgroundColor = "white";
-                document.getElementById("NoteText").style.color = "black";
-                document.getElementById("NoteHead").style.color = "black";
+                document.getElementById("NoteText").style.color = "#1e1b22";
+                document.getElementById("NoteHead").style.color = "#1e1b22";
             }
             if (document.getElementsByName("theme")[i].value == "Dark") {
-                document.getElementById("NoteText").style.backgroundColor = "black";
-                document.getElementById("NoteHead").style.backgroundColor = "black";
+                document.getElementById("NoteText").style.backgroundColor = "#1e1b22";
+                document.getElementById("NoteHead").style.backgroundColor = "#1e1b22";
                 document.getElementById("NoteText").style.color = "white";
                 document.getElementById("NoteHead").style.color = "white";
             }
             if (document.getElementsByName("theme")[i].value == "Monokai") {
-                document.getElementById("NoteText").style.backgroundColor = "black";
-                document.getElementById("NoteHead").style.backgroundColor = "black";
-                document.getElementById("NoteText").style.color = "red";
-                document.getElementById("NoteHead").style.color = "red";
+                document.getElementById("NoteText").style.backgroundColor = "#1e1b22";
+                document.getElementById("NoteHead").style.backgroundColor = "#1e1b22";
+                document.getElementById("NoteText").style.color = "#87033b";
+                document.getElementById("NoteHead").style.color = "#87033b";
             }
             if (document.getElementsByName("theme")[i].value == "Chocolate") {
-                document.getElementById("NoteText").style.backgroundColor = "brown";
-                document.getElementById("NoteHead").style.backgroundColor = "brown";
-                document.getElementById("NoteText").style.color = "yellow";
-                document.getElementById("NoteHead").style.color = "yellow";
+                document.getElementById("NoteText").style.backgroundColor = "#632f07";
+                document.getElementById("NoteHead").style.backgroundColor = "#632f07";
+                document.getElementById("NoteText").style.color = "#fff440";
+                document.getElementById("NoteHead").style.color = "#fff440";
             }
         }
     }
@@ -221,48 +224,38 @@ function ChangeToItalic() {
 	}
 }
 
-function ChangeToVollkorn() {
-    document.getElementById("NoteText").style.fontFamily = 'Vollkorn';
+{% for font, family in fonts %}
+function ChangeTo{{family}}() {
+    document.getElementById("NoteText").style.fontFamily = "{{font.family}}";
 }
-
-function ChangeToRedHatMono() {
-    document.getElementById("NoteText").style.fontFamily = 'Red Hat Mono';
-}
-
-function ChangeToRobotoSlab() {
-    document.getElementById("NoteText").style.fontFamily = 'Roboto Slab';
-}
-
-function ChangeToOpenSans() {
-    document.getElementById("NoteText").style.fontFamily = 'Open Sans';
-}
+{% endfor %}
 
 function ChangeToLight() {
     document.getElementById("NoteText").style.backgroundColor = "white";
     document.getElementById("NoteHead").style.backgroundColor = "white";
-    document.getElementById("NoteText").style.color = "black";
-    document.getElementById("NoteHead").style.color = "black";
+    document.getElementById("NoteText").style.color = "#1e1b22";
+    document.getElementById("NoteHead").style.color = "#1e1b22";
 }
 
 function ChangeToDark() {
-    document.getElementById("NoteText").style.backgroundColor = "black";
-    document.getElementById("NoteHead").style.backgroundColor = "black";
+    document.getElementById("NoteText").style.backgroundColor = "#1e1b22";
+    document.getElementById("NoteHead").style.backgroundColor = "#1e1b22";
     document.getElementById("NoteText").style.color = "white";
     document.getElementById("NoteHead").style.color = "white";
 }
 
 function ChangeToMonokai() {
-    document.getElementById("NoteText").style.backgroundColor = "black";
-    document.getElementById("NoteHead").style.backgroundColor = "black";
-    document.getElementById("NoteText").style.color = "red";
-    document.getElementById("NoteHead").style.color = "red";
+    document.getElementById("NoteText").style.backgroundColor = "#1e1b22";
+    document.getElementById("NoteHead").style.backgroundColor = "#1e1b22";
+    document.getElementById("NoteText").style.color = "#87033b";
+    document.getElementById("NoteHead").style.color = "#87033b";
 }
 
 function ChangeToChocolate() {
-    document.getElementById("NoteText").style.backgroundColor = "brown";
-    document.getElementById("NoteHead").style.backgroundColor = "brown";
-    document.getElementById("NoteText").style.color = "yellow";
-    document.getElementById("NoteHead").style.color = "yellow";
+    document.getElementById("NoteText").style.backgroundColor = "#632f07";
+    document.getElementById("NoteHead").style.backgroundColor = "#632f07";
+    document.getElementById("NoteText").style.color = "#fff440";
+    document.getElementById("NoteHead").style.color = "#fff440";
 }
 
 function ChangeToDefault() {
@@ -287,8 +280,8 @@ function ChangeToDefault() {
             document.getElementsByName("theme")[i].checked = true;
             document.getElementById("NoteText").style.backgroundColor = "white";
             document.getElementById("NoteHead").style.backgroundColor = "white";
-            document.getElementById("NoteText").style.color = "black";
-            document.getElementById("NoteHead").style.color = "black";
+            document.getElementById("NoteText").style.color = "#1e1b22";
+            document.getElementById("NoteHead").style.color = "#1e1b22";
         }
         else {
             document.getElementsByName("theme")[i].checked = false;

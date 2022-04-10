@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
+class Font(models.Model):
+    family = models.CharField(max_length=50)
+    url = models.CharField(max_length=255)
+
+
 class Text(models.Model):
     THEME = (
         ('Light', 'Light'),
@@ -28,6 +33,6 @@ class Text(models.Model):
     # date_of_creation = models.DateField(null=True)
     # date_of_recent_change = models.DateField(null=True)
     font_size = models.IntegerField(default=16, validators=[MaxValueValidator(98), MinValueValidator(12)])
-    font_family = models.CharField(max_length=63, choices=FAMILIES, null=True)
-    font_type = models.CharField(max_length=25, choices=TYPES, null=True)
-    theme_type = models.CharField(max_length=25, choices=THEME, null=True)
+    font_family = models.ForeignKey(Font, on_delete=models.CASCADE, blank=True)
+    font_type = models.CharField(max_length=25, choices=TYPES)
+    theme_type = models.CharField(max_length=25, choices=THEME)
