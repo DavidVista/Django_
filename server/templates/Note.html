@@ -127,15 +127,11 @@
         Список записей
     </h2>
     <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            <ul id="list">
                 {% for t in texts %}
                 {% if t.user.username == username %}
-                <form method="POST"> {% csrf_token %} <button value="{{ t.name }}" type="submit" class="btn btn-primary bl clr addit" name="txt"> {{ t.name }} </button> <button id="delete" value="{{t.name}}" type="submit" class="btn btn-danger bl clr addit" name="is_deleted">Удалить</button></form>
+                <form method="POST"> {% csrf_token %} <button value="{{ t.name }}" type="submit" class="btn btn-primary bl" name="txt"> {{ t.name }} </button> <button id="delete" value="{{t.name}}" type="submit" class="btn btn-danger bl" name="is_deleted">Удалить</button></form>
                 {% endif %}
                 {% endfor %}
-            </ul>
-        </div>
     </div>
 </div>
 

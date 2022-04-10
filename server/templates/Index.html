@@ -4,7 +4,6 @@
 <head>
     <title> ReMind! </title>
     <meta charset="UTF-8"/>
-    <script src="{% static 'Re.js' %}"></script>
     <link href="{% static 'Re.css' %}" rel="stylesheet" type="text/css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -46,20 +45,16 @@
                 <li class="addit"><a class="clr" href="{% url 'faq' %}"> С чего начать? </a></li>
             </ol>
         </div>
-        <div>
+        <div class="wrapper-c">
             {% if not authenticated %}
             <h2 class="sb label-l" align="right" style="margin-right:30px;"> Вход и регистрация </h2>
-            <div class="wrapper-c">
                 <a type="button" class="btn btn-outline-primary bl" href="{% url 'registration' %}">Регистрация</a>
                 <a type="button" class="btn btn-outline-success bl" href="{% url 'login' %}">Вход</a>
-            </div>
             {% else %}
             <h2 class="sb label-l" align="right" style="margin-right:30px;"> Аккаунт </h2>
-            <div class="wrapper-c w-cc">
-                <span align="center" class="login input-group-text"> Логин: {{ username }} </span>
+                <h3 class="addit bl"><span align="center" class="badge input-group-text text-dark"> Логин: {{ username }}</span></h3>
                 <a type="button" class="btn btn-outline-primary bl" href="{% url 'note' %}">Мой блокнот</a>
                 <a type="button" class="btn btn-outline-warning bl" href="{% url 'logout' %}">Выход</a>
-            </div>
             {% endif %}
         </div>
     </div>

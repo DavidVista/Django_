@@ -107,7 +107,6 @@ def logout_page(request):
 
 def note(request):
     if request.user.is_authenticated:
-        print(request.POST)
         if request.method == "POST" and request.POST.get("font_size") is not None and request.POST.get(
                 "new_sheet") is None and request.POST.get("link") is '':
             req_text = False
