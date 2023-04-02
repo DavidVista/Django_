@@ -232,7 +232,7 @@ def note(request):
             req_text = False
             texts = Text.objects.all()
             url = request.POST.get("link")
-            u = url[41:].split(":")[0]
+            u = url[41:][:-13].split(":")[0]
             u = " ".join(u.split("+"))
             form = FontForm(data={
                 "url": url,
