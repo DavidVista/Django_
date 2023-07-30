@@ -7,7 +7,6 @@ git clone https://github.com/DavidVista/Django_.git
 ```
 * ### Install all requirements:
 ```commandline
-pip freeze > req.txt
 pip install -r req.txt
 ```
 * ### Set virtual environment:
